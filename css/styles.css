@@ -507,20 +507,21 @@ a:hover {
 */
 #video_bg {
 	position: fixed;
-	right: 0;
-	bottom: 0;
+	left: 50%;
+	top: 50%;
+    /*
 	min-width: 100%;
 	min-height: 100%;
 	max-height: 4000%;
 	max-width: 1000%;
+    */
 	z-index: -1000;
-	width: auto;
-	height: auto;
-	overflow: hidden;
+	overflow: hidden
+    /*
 	background: url(../img/pattern.jpg) no-repeat;
 	-ms-background-size: cover;
 	background-size: cover;
-    
+    */
     -webkit-filter: grayscale(0.5) contrast(1.5) sepia(0.5);
 }
 
@@ -528,13 +529,8 @@ a:hover {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYmZiNWFhIiBzdG9wLW9wYWNpdHk9IjAuOTUiLz4KICAgIDxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZGVlMGQ5IiBzdG9wLW9wYWNpdHk9IjAuODUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2M3ZDBkNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
-    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,hsla(31,14%,71%,0.95)), color-stop(40%,hsla(77,10%,87%,0.85)), color-stop(100%,hsla(204,15%,81%,1)));
-    background: -webkit-linear-gradient(-45deg,  hsla(31,14%,71%,0.95) 0%,hsla(77,10%,87%,0.85) 40%,hsla(204,15%,81%,1) 100%);
-    background: -webkit-linear-gradient(315deg, hsla(31,14%,71%,0.95) 0%, hsla(77,10%,87%,0.85) 40%, hsla(204,15%,81%,1) 100%);
-    background: linear-gradient(135deg,  hsla(31,14%,71%,0.95) 0%,hsla(77,10%,87%,0.85) 40%,hsla(204,15%,81%,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2bfb5aa', endColorstr='#c7d0d6',GradientType=1 );
 
+	background-image: url(../img/bg_bruit.png);
 
 }
 /*
@@ -592,9 +588,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%
-
-/*	background-image: url(../img/bg_bruit.png);*/
+	height: 100%;
+    display: table;
+        
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYmZiNWFhIiBzdG9wLW9wYWNpdHk9IjAuOTUiLz4KICAgIDxzdG9wIG9mZnNldD0iNDAlIiBzdG9wLWNvbG9yPSIjZGVlMGQ5IiBzdG9wLW9wYWNpdHk9IjAuODUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2M3ZDBkNiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,hsla(31,14%,71%,0.95)), color-stop(40%,hsla(77,10%,87%,0.85)), color-stop(100%,hsla(204,15%,81%,1)));
+    background: -webkit-linear-gradient(-45deg,  hsla(31,14%,71%,0.95) 0%,hsla(77,10%,87%,0.85) 40%,hsla(204,15%,81%,1) 100%);
+    background: -webkit-linear-gradient(315deg, hsla(31,14%,71%,0.95) 0%, hsla(77,10%,87%,0.85) 40%, hsla(204,15%,81%,1) 100%);
+    background: linear-gradient(135deg,  hsla(31,14%,71%,0.95) 0%,hsla(77,10%,87%,0.85) 40%,hsla(204,15%,81%,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2bfb5aa', endColorstr='#c7d0d6',GradientType=1 );
 
 }
 /*
@@ -606,7 +608,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     width: 100%;
     height: 100%;
     text-align: center;
-    margin-top: 25%;
+    
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .title_page{
@@ -630,8 +634,48 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
 .description{
     text-transform: inherit;
     font-size: 1.4rem;
-    margin-top: 40px
-/*    font-weight: 400;*/
+    margin-top: 40px;
+    font-weight: 400;
+}
+.scroll_down{
+    margin-top: 30px;
+}
+.scroll_down>span{
+    font-size: 1.8rem;
+    
+    animation: anim 2s infinite;
+    -webkit-animation: anim 2s infinite;
+    -moz-animation: anim 2s infinite;
+    -ms-animation: anim 2s infinite;
+    -o-animation: anim 2s infinite;
+}
+
+@keyframes anim {
+	0% {-webkit-transform: translateY(0px);transform: translateY(0px);}
+	50% {-webkit-transform: translateY(10px);transform: translateY(10px);}
+	100% {-webkit-transform: translateY(0px);transform: translateY(0px);}
+}
+
+@-webkit-keyframes anim {
+	0% {-webkit-transform: translateY(0px);}
+	50% {-webkit-transform: translateY(10px);}
+	100% {-webkit-transform: translateY(0px);}
+}
+
+@-ms-keyframes anim {
+	0% {-ms-transform: translateY(0px);}
+	50% {-ms-transform: translateY(10px);}
+	100% {-ms-transform: translateY(0px);}
+}
+
+.bonhomme{
+    position: absolute;
+    right: 8%;
+    bottom: 5%;
+    opacity: 0;
+}
+.bonhomme>img{
+    width: 80px;   
 }
 /*
 *===================================
@@ -640,7 +684,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
 */
 #footer {
 	z-index: 300;
-	display: block;
+	display: table;
 	position: fixed;
 	left: 0;
 	bottom: 0;
@@ -676,25 +720,29 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	text-align: left;
 	width: 100%;
 	margin: 0 auto;
-	margin-top: 4px;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 20px;
 }
-
-#controls>div {
-	display: inline-block;
-	vertical-align: top;
+#controls a{
+    display: block;
+    float: left;
+    overflow: hidden;
+    color: rgba(0,0,0,.4);
+    text-align: center;
+    width: 25px;
+	height: 30px;
+	font-size: 1.5rem;
+    padding-top: 6px;
 }
-
-#controls a {
-	display: block;
-	float: left;
-	width: 50px;
-	height: 50px;
-	overflow: hidden;
-	font-size: 4rem;
-	margin: 0 12px;
-	color: rgba(255,255,255,.6);
-}
-
 #controls a:hover {
-	color: rgba(255,255,255,1);
+	color: rgba(0,0,0,.8);
+}
+#controls a:first-child{
+    width: 60px;
+    padding-top: 0;
+}
+.toggle_sound{
+    font-size: 2rem;
+    padding-top: 5px;
 }

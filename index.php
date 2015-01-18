@@ -4,7 +4,7 @@
 	<div id="wrapper">
 
         <div id="wrapper_video">
-            <video id="video_bg" preload="auto" autoplay loop muted >
+            <video id="video_bg" preload="auto" autoplay loop muted>
                 <source src="vid/bg_vid.mp4"type="video/mp4" />
 <!--					<source src="vid/bg_vid.webm"type="video/webm" />-->
                 Your browser does not support the video tag. You need to update your browser or change it :/
@@ -25,20 +25,26 @@
                 <p>Hi ! I'm</p>
                 <h1 class="title_page">Corentin FLACH</h1>
                 <h2 class="sub_title">a storyteller</h2>
-                <h3 class="description">Using the web with videos, developement and communication.</h3>
+<!--                <h3 class="description">Using the web with videos, developement and communication.</h3>-->
+                <p class="scroll_down"><span class="icon-angle-down"></span></p>
                 
             </section>
-       
-       
+            
+            <div class="bonhomme">
+                <img src="img/bonhomme.png" />
+            </div>
        
         </div>
 
         <div id="progressBar"></div>
         <footer id="footer">
             <div id="controls">
-                <div id="c_left">
-                    <a><span class="icon-volume-up-1 toggle_sound"></span></a>
-                </div>
+                <a><span class="icon-signal toggle_sound"></span></a>
+                <a data-music="music/music_jazz.mp3">▲</a>
+                <a data-music="music/music_film.mp3">▼</a>
+                <a data-music="music/music_street.mp3">▲</a>
+                <a data-music="music/music_vacances.mp3">▼</a>
+                <a data-music="music/music_hardrock.mp3">▲</a>
             </div>
         </footer>
         
