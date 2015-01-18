@@ -40,13 +40,17 @@
         <footer id="footer">
             <div id="controls">
                 <a><span class="icon-signal toggle_sound"></span></a>
-                <a data-music="music/music_jazz.mp3">▲</a>
-                <a data-music="music/music_film.mp3">▼</a>
-                <a data-music="music/music_street.mp3">▲</a>
-                <a data-music="music/music_vacances.mp3">▼</a>
-                <a data-music="music/music_hardrock.mp3">▲</a>
+                <a class="btn_music" data-music="music/music_jazz.mp3">▲</a>
+                <a class="btn_music" data-music="music/music_film.mp3">▼</a>
+                <a class="btn_music" data-music="music/music_street.mp3">▲</a>
+                <a class="btn_music" data-music="music/music_vacances.mp3">▼</a>
+                <a class="btn_music" data-music="music/music_hardrock.mp3">▲</a>
             </div>
         </footer>
+        
+        <audio id="music">
+            <source src="" type="audio/mpeg" />
+        </audio>
         
 		
 	</div>

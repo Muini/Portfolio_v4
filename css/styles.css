@@ -500,6 +500,10 @@ a,a:active,a:visited {
 a:hover {
 	color: #fff;
 }
+
+audio{
+    display: none;   
+}
 /*
 *===================================
 *    VIDEO
