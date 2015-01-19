@@ -96,12 +96,14 @@ var portfolio = {
         this.setUrl(name);
         
         if(!page_togo.hasAttribute("data-loaded"))
-        {
-            //Put Loader
-            page_togo.innerHTML = "<img class='loader' img='loader.gif' alt='Loading' />";
-            
+        {            
             var url = window.location;
-            url = url.toString().split("#/")[0]+"/pages/"+name+".php";
+            url = url.toString().split("#/")[0];
+            
+            //Put Loader
+            page_togo.innerHTML = "<img class='loader' src='"+url+"img/loader.gif' alt='Loading' />";            
+            
+            url += "/pages/"+name+".php";
             
             this.ajaxGet( url, function(data){
 
@@ -111,6 +113,7 @@ var portfolio = {
                 it.canNavigate = true;
             
             });
+
         }else{
             it.canNavigate = true;
         }
@@ -185,7 +188,7 @@ var video = {
         //Son
         var it = this;
         document.querySelector('.toggle_sound').onclick = function(){
-            $(this).toggleClass('icon-volume-up-1').toggleClass('icon-volume-off-1');
+            this.className = "icon-signal toggle_sound"; //Changement d'icone
             it.toggleSound(); //On toggle le son
         }
         
@@ -235,12 +238,12 @@ var audio = {
         
         this.music = document.getElementById('music');
         this.music.pause();
-        this.music.currentTime = 0;
+//        this.music.currentTime = 0;
         this.music.volume = 0.6;
         
         this.hover = document.getElementById('hover_sound');
         this.hover.pause();
-        this.hover.currentTime = 0;
+//        this.hover.currentTime = 0;
         this.hover.volume = 0.4;
         
         var btns_music = document.querySelectorAll('.btn_music');
@@ -304,15 +307,13 @@ window.onresize = function(){
 portfolio.init();
 
 //Overwrite Scroll
-window.onscroll = window.onmousewheel = document.onscroll = document.onmousewheel = window.ontouchmove = function(e){
-    e.preventDefault();
+window.onscroll = window.onmousewheel = document.onscroll = document.onmousewheel = window.ontouchmove = function(){
     return false;
 };
 window.addEventListener("mousewheel",scroll,false);
 window.addEventListener("DOMMouseScroll",scroll,false);
 
 function scroll(e) {
-    e.preventDefault();
     
     if(portfolio.canNavigate)
     {
@@ -327,6 +328,22 @@ function scroll(e) {
     }
     
     return false;
+}
+
+this.onkeydown = function(e){
+    
+    e=e || window.event;
+    var code=e.keyCode || e.which;	
+    //Haut
+    if (code==38){
+        portfolio.previousPage();
+        return false;
+    }
+    //Bas
+    if (code==40){
+        portfolio.nextPage();
+        return false;
+    }
 }
 
 

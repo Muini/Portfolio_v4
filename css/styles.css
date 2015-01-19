@@ -508,6 +508,10 @@ audio{
 .hidden{
     display: none !important;   
 }
+.loader{
+    width:50px;
+    height: 50px;
+}
 /*
 *===================================
 *    VIDEO
@@ -561,8 +565,13 @@ background: -webkit-linear-gradient(top,  hsla(144,22%,91%,0.3) 0%,hsla(0,0%,0%,
 background: -webkit-linear-gradient(top, hsla(144,22%,91%,0.3) 0%, hsla(0,0%,0%,0) 100%);
 background: linear-gradient(to bottom,  hsla(144,22%,91%,0.3) 0%,hsla(0,0%,0%,0) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', endColorstr='#00000000',GradientType=0 );
+    
+}
 
-
+@-moz-document url-prefix() {
+    #header,#footer{
+        background: none !important;   
+    }
 }
 /*
 *===================================

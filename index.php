@@ -57,9 +57,11 @@
         
         <audio id="music">
             <source src="" type="audio/mpeg" />
+            <source src="" type="audio/ogg" />
         </audio>
         <audio id="hover_sound">
             <source src="" type="audio/mpeg" />
+            <source src="" type="audio/ogg" />
         </audio>
         
 		
