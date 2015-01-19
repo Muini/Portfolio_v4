@@ -20,15 +20,22 @@
         </header>
 
         <div id="container">
-            <section class="page">
+            <section id="page_home" class="page active_page" data-loaded>
                 
                 <p>Hi ! I'm</p>
                 <h1 class="title_page">Corentin FLACH</h1>
                 <h2 class="sub_title">a storyteller</h2>
-<!--                <h3 class="description">Using the web with videos, developement and communication.</h3>-->
                 <p class="scroll_down"><span class="icon-angle-down"></span></p>
                 
             </section>
+            
+            <section id="page_howto" class="page hidden"></section>
+            
+            <section id="page_skills" class="page hidden"></section>
+            
+            <section id="page_production" class="page hidden"></section>
+            
+            <section id="page_contact" class="page hidden"></section>
             
             <div class="bonhomme">
                 <img src="img/bonhomme.png" />
@@ -49,6 +56,9 @@
         </footer>
         
         <audio id="music">
+            <source src="" type="audio/mpeg" />
+        </audio>
+        <audio id="hover_sound">
             <source src="" type="audio/mpeg" />
         </audio>
         

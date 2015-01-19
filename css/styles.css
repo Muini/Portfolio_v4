@@ -504,6 +504,10 @@ a:hover {
 audio{
     display: none;   
 }
+
+.hidden{
+    display: none !important;   
+}
 /*
 *===================================
 *    VIDEO
