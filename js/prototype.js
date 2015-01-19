@@ -1,3 +1,6 @@
+//Global Var
+var isFF = !!navigator.userAgent.match('/Firefox/');
+
 //Portfolio Controller
 var portfolio = {
     
@@ -176,17 +179,22 @@ var video = {
     
     it: null,
     
-    init: function(){
-        
+    init: function(){        
         this.it = document.getElementsByTagName('video')[0];
+        this.it.pause();
         this.it.currentTime = 0;
         this.it.addEventListener('timeupdate',this.maj_bar);
         this.maj_bar();
         this.resize();
         this.it.volume = 0.8;
         
-        //Son
         var it = this;
+        
+        this.it.onprogress = function(){
+            console.log(  it.getPercentBuffered() ); 
+        }
+        
+        //Son
         document.querySelector('.toggle_sound').onclick = function(){
             this.className = "icon-signal toggle_sound"; //Changement d'icone
             it.toggleSound(); //On toggle le son
@@ -224,6 +232,10 @@ var video = {
         }
         this.it.muted = !this.it.muted;
         
+    },
+    
+    getPercentBuffered: function(){
+        return parseInt((this.it.buffered.end(0) / this.it.duration)*100);
     }
     
 }
@@ -238,12 +250,14 @@ var audio = {
         
         this.music = document.getElementById('music');
         this.music.pause();
-//        this.music.currentTime = 0;
+        if(!isFF)
+            this.music.currentTime = 0;
         this.music.volume = 0.6;
         
         this.hover = document.getElementById('hover_sound');
         this.hover.pause();
-//        this.hover.currentTime = 0;
+        if(!isFF)
+            this.hover.currentTime = 0;
         this.hover.volume = 0.4;
         
         var btns_music = document.querySelectorAll('.btn_music');
@@ -269,7 +283,8 @@ var audio = {
     muteMusic: function(){
         
         this.music.pause();
-        this.music.currentTime = 0;
+        if(!isFF)
+            this.music.currentTime = 0;
         
     },
     
@@ -278,7 +293,8 @@ var audio = {
         if(video.it.muted)
             video.it.muted = false;
         this.music.src = src;
-        this.music.currentTime = 0;
+        if(!isFF)
+            this.music.currentTime = 0;
         this.music.play();
         
     },
@@ -288,7 +304,8 @@ var audio = {
         if(!video.it.muted)
         {
             this.hover.src = src;
-            this.hover.currentTime = 0;
+            if(!isFF)
+                this.hover.currentTime = 0;
             this.hover.play();
         }
         
