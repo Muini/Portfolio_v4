@@ -15,7 +15,7 @@ var portfolio = {
     
     first_launch: true,
     
-    canNavigate: false,
+    canNavigate: true,
     
     init: function(){
         
@@ -43,7 +43,7 @@ var portfolio = {
     },
     
     resize: function(){
-
+        video.resize();
     },
     
     nextPage: function(){
@@ -97,59 +97,88 @@ var portfolio = {
         
         var it = this;
         
-        this.canNavigate = false;
-        
-        var current_page = document.querySelector('.active_page');
-        if(current_page)
-            current_page.className = "page hidden";
-        
-        var page_togo = document.getElementById('page_'+name);
-        if(page_togo){
-            page_togo.className = "page active_page";
-        }else{
-            console.log("404 - Not found");
-            this.goTo('home');
-            name = "";
-        }
-        
-        this.setUrl(name);
-        
-        this.navProgress.setCurrentStep(name);
-        
-        if(!page_togo.hasAttribute("data-loaded"))
-        {            
-            var url = window.location;
-            url = url.toString().split("#/")[0];
-            
-            //Put Loader
-            page_togo.innerHTML = "<img class='loader' src='"+url+"img/loader.gif' alt='Loading' />";            
-            
-            url += "/pages/"+name+".php";
-            
-            this.ajaxGet( url, function(data){
+        if(this.canNavigate)
+        {
+            it.canNavigate = false;
 
-                page_togo.innerHTML = data;
-                
-                page_togo.setAttribute("data-loaded","");
-                
-                if(it.first_launch){
-                    setTimeout(function(){
-                        TweenMax.to(document.getElementById('beforeLoad'),2,{opacity:0,onComplete:function(){
-                            document.getElementById('beforeLoad').style.display = "none";
-                            it.canNavigate = true;
-                        }});
-                        it.first_launch = false;
-                    },1000);
+            var current_page = document.querySelector('.active_page');
+            var page_togo = document.getElementById('page_'+name);
+            
+            if(current_page){
+                it.animation(current_page,true,getPage);
+            }else{
+                getPage();
+            }
+
+            //Function created for callback
+            function getPage(){
+
+                if(current_page)
+                    current_page.className = "page hidden";
+
+                if(page_togo){
+                    page_togo.className = "page active_page";
                 }else{
-                    it.canNavigate = true;
+                    console.log("404 - Not found");
+                    it.goTo('home');
+                    name = "";
                 }
-            
-            });
+                
+                it.setUrl(name);
 
-        }else{
-            it.canNavigate = true;
+                it.navProgress.setCurrentStep(name);
+
+                if(!page_togo.hasAttribute("data-loaded"))
+                {            
+                    var url = window.location;
+                    url = url.toString().split("#/")[0];
+
+                    //Put Loader
+                    page_togo.innerHTML = "<img class='loader' src='"+url+"img/loader.gif' alt='Loading' />";            
+
+                    url += "/pages/"+name+".php";
+
+                    it.ajaxGet( url, function(data){
+
+                        page_togo.style.opacity = 0;
+                        page_togo.innerHTML = data;
+
+                        page_togo.setAttribute("data-loaded","");
+
+                        if(it.first_launch){
+                            setTimeout(function(){
+                                TweenMax.to(document.getElementById('beforeLoad'),2,{opacity:0,onComplete:function(){
+                                    document.getElementById('beforeLoad').style.display = "none";
+                                    it.animation(page_togo,false,function(){
+                                        it.canNavigate = true;
+                                    });
+                                }});
+                                it.first_launch = false;
+                            },1000);
+                        }else{
+                            it.animation(page_togo,false,function(){
+                                it.canNavigate = true;
+                            });
+                        }
+
+                    });
+
+                }else{
+                    it.animation(page_togo,false,function(){
+                        it.canNavigate = true;
+                    });
+                }
+            }
         }
         
+    },
+    
+    animation: function(elem, out, callback){
+        if(out){
+            TweenMax.to(elem,.3,{opacity:0,onComplete:callback});
+        }else{
+            TweenMax.to(elem,1,{opacity:1,onComplete:callback});
+        }
     },
     
     //Rooting stuff
@@ -322,12 +351,15 @@ var video = {
         {
             //Width higher
             this.it.style.width = window.innerWidth+"px";
+            this.it.style.height = window.innerWidth/1.77+"px";
         }else{
             //Height higher
             this.it.style.height = window.innerHeight+"px";
+            this.it.style.width = window.innerHeight*1.77+"px";
         }
-        this.it.style.marginLeft = -this.it.offsetWidth/2+"px";
-        this.it.style.marginTop = -this.it.offsetHeight/2+"px";
+
+        this.it.style.marginLeft = -(this.it.offsetWidth/2)+"px";
+        this.it.style.marginTop = -(this.it.offsetHeight/2)+"px";
         
     },
     
