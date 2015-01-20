@@ -1,7 +1,14 @@
-//Global Var
-var isFF = !!navigator.userAgent.match('/Firefox/');
+//=====================================================================================
+// Hey there, welcome to the dark face of my portfolio,
+// You can check my code if you want, it's just some function
+// I'm using GSAP for animations and the rest is native js
+// If you still have a question : corentin.flach(at)gmail.com
+//=====================================================================================
 
-//Portfolio Controller
+
+//==========================================
+// Portfolio Controller
+//==========================================
 var portfolio = {
     
     pages: null,
@@ -12,11 +19,19 @@ var portfolio = {
     
     init: function(){
         
-        //D'abord l'audio puis la video
+        //Audio then Video
         audio.init();
         video.init();
         
+        //Pages init
+        this.navProgress.init();
         this.pages = document.querySelectorAll('.page');
+        for(var i=0; i<this.pages.length; i++)
+        {
+            var pageName = this.pages[i].getAttribute('id');
+            pageName = pageName.split('_')[1];
+            this.navProgress.addStep(pageName);
+        }
         
         //Rooting
         if( this.getUrl() == undefined || this.getUrl() == "" || this.getUrl()=="home" ){
@@ -77,6 +92,7 @@ var portfolio = {
         
     },
     
+    //Navigation core
     goTo: function(name){
         
         var it = this;
@@ -97,6 +113,8 @@ var portfolio = {
         }
         
         this.setUrl(name);
+        
+        this.navProgress.setCurrentStep(name);
         
         if(!page_togo.hasAttribute("data-loaded"))
         {            
@@ -134,6 +152,7 @@ var portfolio = {
         
     },
     
+    //Rooting stuff
     setUrl: function(str){
         
         var url = window.location;
@@ -165,6 +184,7 @@ var portfolio = {
         
     },
     
+    //Ajax custom function, thanks to Pierre Guilhou
     ajaxGet:function(url, callback){
         
         var xmlhttp = window.XMLHttpRequest
@@ -197,22 +217,63 @@ var portfolio = {
         xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xmlhttp.send('');
         
-    }
+    },
+    
+    //Little navigation progress on the bottom left
+    navProgress: {
+        
+        it: null,
+        
+        nbr_steps: 0,
+        
+        init: function(){
+            this.it = document.getElementById('navProgress');
+        },
+        
+        addStep: function(name){
+            var newStep = document.createElement('a');
+            newStep.setAttribute('data-link',name);
+            newStep.setAttribute('class','navProgress_step');
+            newStep.innerHTML = '▼';
+            newStep.onclick = function(){
+                portfolio.goTo(this.getAttribute('data-link'));   
+            }
+            this.it.appendChild(newStep);
+            this.nbr_steps ++;
+        },
+        
+        setCurrentStep: function(str){
+            var progressBar = document.getElementById('navProgress_bar');
+            var steps = this.it.getElementsByTagName('a');
+            for(var i=0; i<steps.length; i++)
+            {
+                if( steps[i].getAttribute('data-link') == str )
+                {
+                    steps[i].className = 'navProgress_step active_step';
+                    progressBar.style.height = (i*(100/steps.length))+"%";
+                }else{
+                    steps[i].className = 'navProgress_step';
+                }
+            }
+        }
+        
+    },
     
 }
-//Video Controller
+
+//==========================================
+// Video Controller
+//==========================================
+
 var video = {
     
     it: null,
     
     init: function(){        
-        this.it = document.getElementsByTagName('video')[0];
+        this.it = document.getElementById("video_bg");
         this.it.pause();
-        this.it.currentTime = 0;
         this.it.addEventListener('timeupdate',this.maj_bar);
-        this.maj_bar();
         this.resize();
-        this.it.volume = 0.8;
         
         var it = this;
         
@@ -231,7 +292,10 @@ var video = {
 //        }
         
         this.it.oncanplay = function(){
-            this.play();   
+            this.currentTime = 0;
+            it.maj_bar();
+            this.volume = 0.8;
+            this.play();
         }
         
         //Son
@@ -242,6 +306,7 @@ var video = {
         
     },
     
+    //Actual timeline on the bottom
     maj_bar: function(){
         
         var percent = (parseFloat(this.currentTime)/this.duration)*100;
@@ -249,15 +314,16 @@ var video = {
         
     },
     
+    //Need to fit on every screen, CSS cover isn't enough, respect the ratio (16:9)
     resize: function(){
         
         //console.log(video.it.offsetWidth+"x"+video.it.offsetHeight);
         if( (window.innerWidth/window.innerHeight)>1.77 )
         {
-            //Width plus grand
+            //Width higher
             this.it.style.width = window.innerWidth+"px";
         }else{
-            //Height plus grand
+            //Height higher
             this.it.style.height = window.innerHeight+"px";
         }
         this.it.style.marginLeft = -this.it.offsetWidth/2+"px";
@@ -279,25 +345,27 @@ var video = {
     }
     
 }
-//Audio Controller
+
+//==========================================
+// Audio Controller
+//==========================================
+
 var audio = {
     
+    //The music you choose
     music: null,
     
+    //Every hover sound is just one player
     hover: null,
     
     init: function(){
         
         this.music = document.getElementById('music');
         this.music.pause();
-        if(!isFF)
-            this.music.currentTime = 0;
         this.music.volume = 0.6;
         
         this.hover = document.getElementById('hover_sound');
         this.hover.pause();
-        if(!isFF)
-            this.hover.currentTime = 0;
         this.hover.volume = 0.4;
         
         var btns_music = document.querySelectorAll('.btn_music');
@@ -323,8 +391,7 @@ var audio = {
     muteMusic: function(){
         
         this.music.pause();
-        if(!isFF)
-            this.music.currentTime = 0;
+        this.music.currentTime = 0;
         
     },
     
@@ -333,8 +400,7 @@ var audio = {
         if(video.it.muted)
             video.it.muted = false;
         this.music.src = src;
-        if(!isFF)
-            this.music.currentTime = 0;
+        this.music.currentTime = 0;
         this.music.play();
         
     },
@@ -344,8 +410,7 @@ var audio = {
         if(!video.it.muted)
         {
             this.hover.src = src;
-            if(!isFF)
-                this.hover.currentTime = 0;
+            this.hover.currentTime = 0;
             this.hover.play();
         }
         
@@ -353,14 +418,23 @@ var audio = {
     
 }
 
-//Disable le scroll
-//window.addEventListener('DOMMouseScroll', function(e){preventDefault(e);}, false);
+//==========================================
+// Bonhomme Controller
+//==========================================
+
+var bonhomme = {
+    
+}
+
+//==========================================
+// Initialization
+//==========================================
 
 window.onresize = function(){ 
     portfolio.resize(); 
 };
 
-//Initialisation du site
+//Initialization of the website
 portfolio.init();
 
 //Overwrite Scroll
@@ -387,6 +461,7 @@ function scroll(e) {
     return false;
 }
 
+//Keyboard command for navigation
 this.onkeydown = function(e){
     
     e=e || window.event;

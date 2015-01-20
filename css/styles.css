@@ -407,8 +407,6 @@ body>script {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	margin-left: -200px!important;
-	-ms-filter: "alpha(Opacity=90)";
-	filter: alpha(opacity=90);
 	opacity: .9;
 	border: 1px red solid;
 	width: 400px!important;
@@ -488,17 +486,29 @@ p {
 
 a,a:active,a:visited {
 	text-decoration: none;
-	color: #95b5e3;
-	transition: color .1s ease;
-	-o-transition: color .1s ease;
-	-ms-transition: color .1s ease;
-	-moz-transition: color .1s ease;
-	-webkit-transition: color .1s ease;
+	color: #000;
+    transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -webkit-transition: all .3s ease;
 	cursor: pointer;
 }
 
 a:hover {
-	color: #fff;
+	color: #000;
+    
+    transform: scale(1.2);
+    -o-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+
+    transition: all 0s ease;
+    -o-transition: all 0s ease;
+    -ms-transition: all 0s ease;
+    -moz-transition: all 0s ease;
+    -webkit-transition: all 0s ease;
 }
 
 audio{
@@ -538,13 +548,14 @@ audio{
 	max-width: 1000%;
     */
 	z-index: -1000;
-	overflow: hidden
-    /*
+	overflow: hidden;
+    
 	background: url(../img/pattern.jpg) no-repeat;
 	-ms-background-size: cover;
 	background-size: cover;
-    */
+    
     -webkit-filter: grayscale(0.5) contrast(1.5) sepia(0.5);
+    filter: grayscale(0.5) contrast(1.5) sepia(0.5);
 }
 
 #wrapper_video {
@@ -639,6 +650,52 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
 *    CONTENT
 *===================================
 */
+
+/* Navigation Pages */
+#navProgress{
+    display: block;
+    position: absolute;
+    bottom: 60px;
+    left: 25px;
+    width: 30px;
+    height: auto;
+    text-align: center;
+}
+#navProgress:after{
+    content:'';   
+}
+.navProgress_step{
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    color: rgba(0,0,0,0.3);
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    border-radius: 50%;
+}
+#navProgress_bar{
+    display: block;
+    position: absolute;
+    width: 2px;
+    margin-left: 14px;
+    margin-top: 15px;
+    height: 100%;
+    background: rgba(0,0,0,0.1);
+    
+    -webkit-transition: height .3s ease;
+            transition: height .3s ease;
+}
+.navProgress_step:hover{
+    color: rgba(0,0,0,0.6);
+}
+.active_step{
+    color: rgba(0,0,0,0.6);
+    cursor: default;
+    pointer-events: none;
+}
+/* Pages */
 .page{
     width: 100%;
     height: 100%;
@@ -741,7 +798,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	z-index: 120;
 	width: 0;
 	height: 5px;
-	background: rgba(255,255,255,.9);
+	background: rgba(255,255,255,.3);
 	bottom: 0;
 	left: 0;
 	transition: width .5s ease;
@@ -757,13 +814,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 	margin: 0 auto;
     display: table-cell;
     vertical-align: middle;
-    padding-left: 20px;
+    padding-left: 10px;
 }
 #controls a{
     display: block;
     float: left;
     overflow: hidden;
-    color: rgba(0,0,0,.4);
+    color: rgba(0,0,0,.3);
     text-align: center;
     width: 25px;
 	height: 30px;
@@ -771,7 +828,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
     padding-top: 6px;
 }
 #controls a:hover {
-	color: rgba(0,0,0,.8);
+	color: rgba(0,0,0,.6);
 }
 #controls a:first-child{
     width: 60px;

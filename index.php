@@ -34,13 +34,16 @@
             
             <section id="page_contact" class="page hidden"></section>
             
+            <div id="navProgress">
+                <span id="navProgress_bar"></span>
+            </div>
+            
             <div class="bonhomme">
                 <img src="img/bonhomme.png" />
             </div>
        
         </div>
 
-        <div id="progressBar"></div>
         <footer id="footer">
             <div id="controls">
                 <a><span class="icon-signal toggle_sound"></span></a>
@@ -50,6 +53,7 @@
                 <a class="btn_music" data-music="music/music_vacances.mp3">▼</a>
                 <a class="btn_music" data-music="music/music_hardrock.mp3">▲</a>
             </div>
+            <div id="progressBar"></div>
         </footer>
         
         <audio id="music">
