@@ -1,9 +1,9 @@
-//=====================================================================================
+//=========================================================================================
 // Hey there, welcome to the dark face of my portfolio,
-// You can check my code if you want, it's just some function
-// I'm using GSAP for animations and the rest is native js
-// If you still have a question : corentin.flach(at)gmail.com
-//=====================================================================================
+// You can check my code if you want, it's just some weird functions
+// I'm using GSAP for animations and the rest is native javascript
+// If you still have a question : corentin.flach(at)gmail.com I doesn't bite... or maybe
+//=========================================================================================
 
 
 //==========================================
@@ -33,7 +33,7 @@ var portfolio = {
             this.navProgress.addStep(pageName);
         }
         
-        //Rooting
+        //Routing
         if( this.getUrl() == undefined || this.getUrl() == "" || this.getUrl()=="home" ){
             this.goTo("home");
         }else{
@@ -43,6 +43,7 @@ var portfolio = {
     },
     
     resize: function(){
+        //Video always need to be perfect
         video.resize();
     },
     
@@ -104,6 +105,16 @@ var portfolio = {
             var current_page = document.querySelector('.active_page');
             var page_togo = document.getElementById('page_'+name);
             
+            //If first launch init first animations
+            if( it.first_launch )
+            {
+                var navProgress = document.getElementById('navProgress');
+                var controls = document.querySelectorAll('#controls>a');
+
+                TweenMax.to(navProgress,0,{x:"-90px"});
+                TweenMax.to(controls,0,{y:"60px"});
+            }
+            
             if(current_page){
                 it.animation(current_page,true,getPage);
             }else{
@@ -123,7 +134,7 @@ var portfolio = {
                     it.goTo('home');
                     name = "";
                 }
-                
+                //Change route
                 it.setUrl(name);
 
                 it.navProgress.setCurrentStep(name);
@@ -139,23 +150,31 @@ var portfolio = {
                     url += "/pages/"+name+".php";
 
                     it.ajaxGet( url, function(data){
-
+                        
+                        //We get our content \o/
                         page_togo.style.opacity = 0;
                         page_togo.innerHTML = data;
-
                         page_togo.setAttribute("data-loaded","");
 
                         if(it.first_launch){
+                            //Delete de beforeLoad then draw the page then UI elements
                             setTimeout(function(){
-                                TweenMax.to(document.getElementById('beforeLoad'),2,{opacity:0,onComplete:function(){
+                                
+                                TweenMax.to(document.getElementById('beforeLoad'),1,{opacity:0,onComplete:function(){
                                     document.getElementById('beforeLoad').style.display = "none";
                                     it.animation(page_togo,false,function(){
                                         it.canNavigate = true;
+                                        it.first_launch = false;
+                                        
+                                        TweenMax.to(navProgress,0.6,{x:0});
+                                        TweenMax.staggerTo(controls,0.6,{y:0, ease:Elastic.easeOut},0.05);
                                     });
                                 }});
-                                it.first_launch = false;
+                                
                             },1000);
+                            
                         }else{
+                            //Just draw the page
                             it.animation(page_togo,false,function(){
                                 it.canNavigate = true;
                             });
@@ -164,6 +183,7 @@ var portfolio = {
                     });
 
                 }else{
+                    //We already load the content, just draw it
                     it.animation(page_togo,false,function(){
                         it.canNavigate = true;
                     });
@@ -174,14 +194,18 @@ var portfolio = {
     },
     
     animation: function(elem, out, callback){
+        
         if(out){
+            //Define Out animation
             TweenMax.to(elem,.3,{opacity:0,onComplete:callback});
         }else{
+            //Define In animation
             TweenMax.to(elem,1,{opacity:1,onComplete:callback});
         }
+        
     },
     
-    //Rooting stuff
+    //Routing stuff
     setUrl: function(str){
         
         var url = window.location;
@@ -204,6 +228,7 @@ var portfolio = {
     
     setTitle:function(str){
         
+        //It's important to get a correct page title
         if(str == "" || str == "home" ){
             document.title = "Corentin Flach - Storyteller";
         }else{
@@ -226,11 +251,13 @@ var portfolio = {
 
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                //We get it ? Callback !
                 TweenMax.to(loader_bar,1,{opacity:0});
                 callback(xmlhttp.responseText);
             }
         };
         xmlhttp.onprogress = function(e){
+            //Custom add for having the state of loading for making a progress bar
             if (xmlhttp.readyState > 2)
             {
                 var totalBytes  = xmlhttp.getResponseHeader('Content-length');
@@ -248,7 +275,7 @@ var portfolio = {
         
     },
     
-    //Little navigation progress on the bottom left
+    //Little (menu) navigation progress on the bottom left
     navProgress: {
         
         it: null,

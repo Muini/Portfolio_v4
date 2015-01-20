@@ -22,7 +22,7 @@
             <div id="loaderAjax" class="loader_bar"></div>
         </header>
 
-        <div id="container">
+        <section id="container">
            
             <section id="page_home" class="page hidden"></section>
             
@@ -34,25 +34,25 @@
             
             <section id="page_contact" class="page hidden"></section>
             
-            <div id="navProgress">
+            <nav id="navProgress">
                 <span id="navProgress_bar"></span>
-            </div>
+            </nav>
             
             <div class="bonhomme">
                 <img src="img/bonhomme.png" />
             </div>
        
-        </div>
+        </section>
 
         <footer id="footer">
-            <div id="controls">
+            <nav id="controls">
                 <a><span class="icon-signal toggle_sound"></span></a>
                 <a class="btn_music" data-music="music/music_jazz.mp3">▲</a>
                 <a class="btn_music" data-music="music/music_film.mp3">▼</a>
                 <a class="btn_music" data-music="music/music_street.mp3">▲</a>
                 <a class="btn_music" data-music="music/music_vacances.mp3">▼</a>
                 <a class="btn_music" data-music="music/music_hardrock.mp3">▲</a>
-            </div>
+            </nav>
             <div id="progressBar"></div>
         </footer>
         
