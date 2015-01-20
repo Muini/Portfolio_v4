@@ -2,6 +2,8 @@
 if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
     header('Location: ../#/skills'); 
 }
+$filesize = filesize($_SERVER['SCRIPT_FILENAME']);
+header('Content-Length: '.$filesize);
 ?>
                 <h2>And now, what can I use ?</h2>
                 <h3 class="description">Now I need skills to produce my ideas.</h3>

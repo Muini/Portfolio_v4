@@ -2,6 +2,8 @@
 if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
     header('Location: ../#/production'); 
 }
+$filesize = filesize($_SERVER['SCRIPT_FILENAME']);
+header('Content-Length: '.$filesize);
 ?>
                 <h2>What about the result ?</h2>
                 <h3 class="description">After production time.</h3>

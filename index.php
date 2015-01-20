@@ -14,20 +14,17 @@
         <noscript>
             <p id="noscript">Oops ! Javascript is desactivated ! Activate it for a full fonctionnal navigation !</p>
         </noscript>
+        
+        <div id="beforeLoad"></div>
 
         <header id="header">
-
+            <div id="loaderVid" class="loader_bar"></div>
+            <div id="loaderAjax" class="loader_bar"></div>
         </header>
 
         <div id="container">
-            <section id="page_home" class="page active_page" data-loaded>
-                
-                <p>Hi ! I'm</p>
-                <h1 class="title_page">Corentin FLACH</h1>
-                <h2 class="sub_title">a storyteller</h2>
-                <p class="scroll_down"><span class="icon-angle-down"></span></p>
-                
-            </section>
+           
+            <section id="page_home" class="page hidden"></section>
             
             <section id="page_howto" class="page hidden"></section>
             

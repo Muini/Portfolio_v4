@@ -6,6 +6,8 @@ var portfolio = {
     
     pages: null,
     
+    first_launch: true,
+    
     canNavigate: false,
     
     init: function(){
@@ -17,10 +19,8 @@ var portfolio = {
         this.pages = document.querySelectorAll('.page');
         
         //Rooting
-        if(this.getUrl() == undefined || this.getUrl() == ""){
-            //FIRST_LAUNCH = true;
-            this.setUrl("");
-            this.canNavigate = true;
+        if( this.getUrl() == undefined || this.getUrl() == "" || this.getUrl()=="home" ){
+            this.goTo("home");
         }else{
             this.goTo(this.getUrl());
         }
@@ -113,7 +113,18 @@ var portfolio = {
                 page_togo.innerHTML = data;
                 
                 page_togo.setAttribute("data-loaded","");
-                it.canNavigate = true;
+                
+                if(it.first_launch){
+                    setTimeout(function(){
+                        TweenMax.to(document.getElementById('beforeLoad'),2,{opacity:0,onComplete:function(){
+                            document.getElementById('beforeLoad').style.display = "none";
+                            it.canNavigate = true;
+                        }});
+                        it.first_launch = false;
+                    },1000);
+                }else{
+                    it.canNavigate = true;
+                }
             
             });
 
@@ -159,14 +170,29 @@ var portfolio = {
         var xmlhttp = window.XMLHttpRequest
           ? new XMLHttpRequest()
           : new ActiveXObject('Microsoft.XMLHTTP');
+        
+        var loader_bar = document.getElementById('loaderAjax');
+        
+        TweenMax.to(loader_bar,0,{opacity:1,width:0});
 
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                console.log("Ajax success");
+                TweenMax.to(loader_bar,1,{opacity:0});
                 callback(xmlhttp.responseText);
             }
         };
-
+        xmlhttp.onprogress = function(e){
+            if (xmlhttp.readyState > 2)
+            {
+                var totalBytes  = xmlhttp.getResponseHeader('Content-length');
+                var dlBytes = xmlhttp.responseText.length;
+                if(totalBytes > 0)
+                {
+                    var percent = (Math.round ((dlBytes / totalBytes) * 100) + "%");
+                    TweenMax.to(loader_bar,0.3,{width:percent});
+                }
+            }
+        }
         xmlhttp.open("GET", url, true);
         xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xmlhttp.send('');
@@ -190,8 +216,22 @@ var video = {
         
         var it = this;
         
-        this.it.onprogress = function(){
-            console.log(  it.getPercentBuffered() ); 
+        var loader_bar = document.getElementById('loaderVid');
+        
+        TweenMax.to(loader_bar,0,{opacity:1,width:0});
+        
+//        this.it.onprogress = function(e){
+//            var buffer = it.getPercentBuffered();
+//            
+//            if( buffer >= 100 ){
+//                TweenMax.to(loader_bar,1,{opacity:0,width:"100%"});
+//            }else if(buffer > 0){
+//                TweenMax.to(loader_bar,0.3,{width:buffer+"%"});
+//            }
+//        }
+        
+        this.it.oncanplay = function(){
+            this.play();   
         }
         
         //Son
