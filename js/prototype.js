@@ -342,8 +342,6 @@ var portfolio = {
 
         init: function(){
             
-            console.log("TREE");
-            
             var it = this;
             
             it.w = window.innerWidth;
@@ -351,9 +349,9 @@ var portfolio = {
             
             it.force = d3.layout.force()
             .on("tick", this.tick)
-            .charge(function(d) { return d._children ? -d.size / 600 : -300; }) //100 : -30
-            .linkDistance(function(d) { return d.target._children ? 30 : 40; })
-            .size([this.w, this.h/1.5])
+            .charge(function(d) { return -250*it.h/1000; }) //100 : -30
+            .linkDistance(function(d) { return 30*it.h/1000; })
+            .size([this.w/1.5, this.h/1.2])
             ;
             
             it.vis = d3.select("#tree_of_skills").append("svg")
@@ -363,7 +361,7 @@ var portfolio = {
             d3.json("data/skills.json", function(json) {
                 it.root = json;
                 it.root.fixed = true;
-                it.root.x = it.w / 2;
+                it.root.x = it.w / 3;
                 it.root.y = it.h - 40;
                 it.update();
             });
@@ -391,7 +389,7 @@ var portfolio = {
             // Enter any new nodes.
             it.node.enter().append("path")
                 .attr("class", "node")
-                .attr("transform", function(d) { return "translate(" + it.w/2 + "," + (it.h - 30) + ")"; })
+                //.attr("transform", function(d) { return "translate(" + it.w/2 + "," + (it.h - 30) + ")"; })
                 //.attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; })
                 //.style("fill", color)
                 .attr("d", d3.svg.symbol().size(0).type("diamond"))
@@ -400,7 +398,7 @@ var portfolio = {
                 .transition()
                     .delay(function(d,i){ return 500+(20*i); })
                     .duration(600)
-                    .attr("d", d3.svg.symbol().size(function(d) { return d.children ? 140 : Math.sqrt(d.size) * 6; }).type("diamond"))
+                    .attr("d", d3.svg.symbol().size(function(d) { return d.children ? d.size/60 : d.size/6; }).type("diamond"))
             ;
 
             // Exit any old nodes.
@@ -463,6 +461,7 @@ var portfolio = {
         hover: function(d) {
             
             //Draw content
+            
             
         },
 

@@ -805,7 +805,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     margin-top: 80px;
 }
 #skills_description{
-    width: 460px;
+    max-width: 460px;
+    min-width: 320px;
     float: right;
 }
 #skills_description>p{
@@ -815,8 +816,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
+}
+#tree_of_skills>svg{
+    position: absolute;
+    bottom:0;
+    left:0;
 }
 #tree_of_skills>svg>path:last-child{
     opacity: 0;
@@ -843,7 +849,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     position: absolute;
     right: 8%;
     bottom: 5%;
-    opacity: 0;
+    opacity: 0.8;
 }
 .bonhomme>img{
     width: 80px;   
