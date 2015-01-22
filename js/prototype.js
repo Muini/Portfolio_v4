@@ -45,6 +45,7 @@ var portfolio = {
     resize: function(){
         //Video always need to be perfect
         video.resize();
+        this.treeOfSkills.resize();
     },
     
     nextPage: function(){
@@ -162,11 +163,8 @@ var portfolio = {
                                         
                                         TweenMax.to(navProgress,0.6,{x:0});
                                         TweenMax.staggerTo(controls,0.6,{y:0, ease:Elastic.easeOut},0.05);
-                                        
-                                        //Specific page script
-                                        if(name == "skills")
-                                            portfolio.treeOfSkills.init();
                                     });
+                                    it.specificPageAction(name);
                                 }});
                                 
                             },1000);
@@ -176,6 +174,7 @@ var portfolio = {
                             it.animation(page_togo,false,function(){
                                 it.canNavigate = true;
                             });
+                            it.specificPageAction(name);
                         }
 
                     });
@@ -195,6 +194,14 @@ var portfolio = {
             }
 
         }
+        
+    },
+    
+    //Specific page script
+    specificPageAction: function(name){
+        
+        if(name == "skills")
+            portfolio.treeOfSkills.init();
         
     },
     
@@ -335,27 +342,30 @@ var portfolio = {
 
         init: function(){
             
+            console.log("TREE");
+            
             var it = this;
             
-            it.w = document.getElementById('tree_of_skills').offsetWidth;
-            it.h = window.innerHeight/2;
+            it.w = window.innerWidth;
+            it.h = window.innerHeight;
             
             it.force = d3.layout.force()
             .on("tick", this.tick)
-            .charge(function(d) { return d._children ? -d.size / 100 : -30; })
-            .linkDistance(function(d) { return d.target._children ? 80 : 30; })
-            .size([this.w, this.h - 160]);
+            .charge(function(d) { return d._children ? -d.size / 600 : -300; }) //100 : -30
+            .linkDistance(function(d) { return d.target._children ? 30 : 40; })
+            .size([this.w, this.h/1.5])
+            ;
             
-            it.vis = d3.select("#tree_of_skills").append("svg:svg")
+            it.vis = d3.select("#tree_of_skills").append("svg")
             .attr("width", this.w)
             .attr("height", this.h);
             
             d3.json("data/skills.json", function(json) {
-              it.root = json;
-              it.root.fixed = true;
-              it.root.x = it.w / 2;
-              it.root.y = it.h / 2 - 80;
-              it.update();
+                it.root = json;
+                it.root.fixed = true;
+                it.root.x = it.w / 2;
+                it.root.y = it.h - 40;
+                it.update();
             });
             
         },
@@ -373,41 +383,50 @@ var portfolio = {
               .links(it.links)
               .start();
 
+            // Update the nodes…
+            it.node = it.vis.selectAll(".node")
+              .data(it.nodes, function(d) { return d.id; })
+              .style("fill", it.color);
+
+            // Enter any new nodes.
+            it.node.enter().append("path")
+                .attr("class", "node")
+                .attr("transform", function(d) { return "translate(" + it.w/2 + "," + (it.h - 30) + ")"; })
+                //.attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; })
+                //.style("fill", color)
+                .attr("d", d3.svg.symbol().size(0).type("diamond"))
+                .on("mouseover", it.hover)
+                .call(it.force.drag)
+                .transition()
+                    .delay(function(d,i){ return 500+(20*i); })
+                    .duration(600)
+                    .attr("d", d3.svg.symbol().size(function(d) { return d.children ? 140 : Math.sqrt(d.size) * 6; }).type("diamond"))
+            ;
+
+            // Exit any old nodes.
+            it.node.exit().remove();
+            
             // Update the links…
             it.link = it.vis.selectAll("line.link")
               .data(it.links, function(d) { return d.target.id; });
 
             // Enter any new links.
-            it.link.enter().insert("svg:line", ".node")
-              .attr("class", "link")
-              .attr("x1", function(d) { return d.source.x; })
-              .attr("y1", function(d) { return d.source.y; })
-              .attr("x2", function(d) { return d.target.x; })
-              .attr("y2", function(d) { return d.target.y; });
+            it.link.enter().insert("line", ".node")
+                .attr("class", "link")
+                .attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; })
+                .attr("opacity", "0")
+                .transition()
+                    .delay(function(d,i){ return 500+(20*i); })
+                    .duration(600)
+                    .attr("opacity", "1")
+            
+            ;
 
             // Exit any old links.
-            it.link.exit().remove();
-
-            // Update the nodes…
-            it.node = it.vis.selectAll("circle.node")
-              .data(it.nodes, function(d) { return d.id; })
-              .style("fill", it.color);
-
-            it.node.transition()
-              .attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; });
-
-            // Enter any new nodes.
-            it.node.enter().append("path")
-              .attr("class", "node")
-              .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-              //.attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; })
-              .attr("d", d3.svg.symbol().size(function(d) { return d.size/100; }).type("triangle-up"))
-              //.style("fill", color)
-              .on("click", it.click)
-              .call(it.force.drag);
-
-            // Exit any old nodes.
-            it.node.exit().remove();
+            it.link.exit().remove()
             
         },
 
@@ -423,6 +442,16 @@ var portfolio = {
             it.node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
             
         },
+        
+        resize: function(){
+            
+//            var it = portfolio.treeOfSkills;
+//            
+//            it.w = window.innerWidth;
+//            it.h = window.innerHeight;
+//            it.vis.attr("width", it.w).attr("height", it.h);
+//            //d3.select("#tree_of_skills>svg").attr("transform","scale(1)");
+        },
 
         color: function(d) {
             
@@ -431,16 +460,10 @@ var portfolio = {
         },
 
         // Toggle children on click.
-        click: function(d) {
+        hover: function(d) {
             
-            if (d.children) {
-                d._children = d.children;
-                d.children = null;
-            } else {
-                d.children = d._children;
-                d._children = null;
-            }
-            //portfolio.treeOfSkills.update();
+            //Draw content
+            
         },
 
         // Returns a list of all nodes under the root.

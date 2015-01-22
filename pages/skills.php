@@ -5,14 +5,16 @@ if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
 $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
 header('Content-Length: '.$filesize);
 ?>
-<section class="collumn">
+<header>
+    <h1 class="title_page">The Tree of Skills</h1>
+</header>
+<section id="skills_description">
     <h2>And now, what can I use ?</h2>
-    <h3 class="description">Now I need skills to produce my ideas.</h3>
+    <h3>Now I need skills to produce my ideas.</h3>
     <p>Or I can buy some friends with beers to do the work for me</p>
     <p>But I need to learn to do it myself.</p>
     <p>So here are my actual skills tree, it still growing.</p>
 </section>
-<section id="tree_of_skills" class="collumn">
-   <h2>The Tree of Skills</h2>
+<section id="tree_of_skills">
     <!-- Here come the tree ! -->
 </section>
