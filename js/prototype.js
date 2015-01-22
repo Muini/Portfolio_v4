@@ -1,7 +1,7 @@
 //=========================================================================================
 // Hey there, welcome to the dark face of my portfolio,
 // You can check my code if you want, it's just some weird functions
-// I'm using GSAP for animations and the rest is native javascript
+// I'm using GSAP for animations, D3JS for the tree of skills and the rest is native javascript
 // If you still have a question : corentin.flach(at)gmail.com I doesn't bite... or maybe
 //=========================================================================================
 
@@ -115,12 +115,6 @@ var portfolio = {
                 TweenMax.to(controls,0,{y:"60px"});
             }
             
-            if(current_page){
-                it.animation(current_page,true,getPage);
-            }else{
-                getPage();
-            }
-
             //Function created for callback
             function getPage(){
 
@@ -168,6 +162,10 @@ var portfolio = {
                                         
                                         TweenMax.to(navProgress,0.6,{x:0});
                                         TweenMax.staggerTo(controls,0.6,{y:0, ease:Elastic.easeOut},0.05);
+                                        
+                                        //Specific page script
+                                        if(name == "skills")
+                                            portfolio.treeOfSkills.init();
                                     });
                                 }});
                                 
@@ -189,6 +187,13 @@ var portfolio = {
                     });
                 }
             }
+            
+            if(current_page){
+                it.animation(current_page,true,getPage);
+            }else{
+                getPage();
+            }
+
         }
         
     },
@@ -315,6 +320,148 @@ var portfolio = {
         
     },
     
+    treeOfSkills: {
+
+        //Tree of Skills with D3JS
+        w: 0,
+        h: 0,
+        node: null,
+        link: null,
+        root: null,
+        force: null,
+        vis: null,
+        nodes: null,
+        links: null,
+
+        init: function(){
+            
+            var it = this;
+            
+            it.w = document.getElementById('tree_of_skills').offsetWidth;
+            it.h = window.innerHeight/2;
+            
+            it.force = d3.layout.force()
+            .on("tick", this.tick)
+            .charge(function(d) { return d._children ? -d.size / 100 : -30; })
+            .linkDistance(function(d) { return d.target._children ? 80 : 30; })
+            .size([this.w, this.h - 160]);
+            
+            it.vis = d3.select("#tree_of_skills").append("svg:svg")
+            .attr("width", this.w)
+            .attr("height", this.h);
+            
+            d3.json("data/skills.json", function(json) {
+              it.root = json;
+              it.root.fixed = true;
+              it.root.x = it.w / 2;
+              it.root.y = it.h / 2 - 80;
+              it.update();
+            });
+            
+        },
+
+        update: function() {
+            
+            var it = this;
+            
+            it.nodes = it.flatten(it.root);
+            it.links = d3.layout.tree().links(it.nodes);
+
+            // Restart the force layout.
+            it.force
+              .nodes(it.nodes)
+              .links(it.links)
+              .start();
+
+            // Update the links…
+            it.link = it.vis.selectAll("line.link")
+              .data(it.links, function(d) { return d.target.id; });
+
+            // Enter any new links.
+            it.link.enter().insert("svg:line", ".node")
+              .attr("class", "link")
+              .attr("x1", function(d) { return d.source.x; })
+              .attr("y1", function(d) { return d.source.y; })
+              .attr("x2", function(d) { return d.target.x; })
+              .attr("y2", function(d) { return d.target.y; });
+
+            // Exit any old links.
+            it.link.exit().remove();
+
+            // Update the nodes…
+            it.node = it.vis.selectAll("circle.node")
+              .data(it.nodes, function(d) { return d.id; })
+              .style("fill", it.color);
+
+            it.node.transition()
+              .attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; });
+
+            // Enter any new nodes.
+            it.node.enter().append("path")
+              .attr("class", "node")
+              .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+              //.attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; })
+              .attr("d", d3.svg.symbol().size(function(d) { return d.size/100; }).type("triangle-up"))
+              //.style("fill", color)
+              .on("click", it.click)
+              .call(it.force.drag);
+
+            // Exit any old nodes.
+            it.node.exit().remove();
+            
+        },
+
+        tick: function() {
+            
+            var it = portfolio.treeOfSkills;
+            
+            it.link.attr("x1", function(d) { return d.source.x; })
+              .attr("y1", function(d) { return d.source.y; })
+              .attr("x2", function(d) { return d.target.x; })
+              .attr("y2", function(d) { return d.target.y; });
+            
+            it.node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+            
+        },
+
+        color: function(d) {
+            
+            return d._children ? "#333333" : d.children ? "#111111" : "#333333";
+            
+        },
+
+        // Toggle children on click.
+        click: function(d) {
+            
+            if (d.children) {
+                d._children = d.children;
+                d.children = null;
+            } else {
+                d.children = d._children;
+                d._children = null;
+            }
+            //portfolio.treeOfSkills.update();
+        },
+
+        // Returns a list of all nodes under the root.
+        flatten: function(root) {
+            
+            var nodes = [], i = 0;
+
+            function recurse(node) {
+                if (node.children) node.size = node.children.reduce(function(p, v) { return p + recurse(v); }, 0);
+                if (!node.id) node.id = ++i;
+                nodes.push(node);
+                return node.size;
+            }
+
+            root.size = recurse(root);
+            return nodes;
+            
+        }
+
+    }
+    
 }
 
 //==========================================
@@ -325,7 +472,8 @@ var video = {
     
     it: null,
     
-    init: function(){        
+    init: function(){     
+        
         this.it = document.getElementById("video_bg");
         this.it.pause();
         this.it.addEventListener('timeupdate',this.maj_bar);
@@ -373,16 +521,17 @@ var video = {
     //Need to fit on every screen, CSS cover isn't enough, respect the ratio (16:9)
     resize: function(){
         
+        var ratio = 1.77;
         //console.log(video.it.offsetWidth+"x"+video.it.offsetHeight);
-        if( (window.innerWidth/window.innerHeight)>1.77 )
+        if( (window.innerWidth/window.innerHeight)>ratio )
         {
             //Width higher
             this.it.style.width = window.innerWidth+"px";
-            this.it.style.height = window.innerWidth/1.77+"px";
+            this.it.style.height = window.innerWidth/ratio+"px";
         }else{
             //Height higher
             this.it.style.height = window.innerHeight+"px";
-            this.it.style.width = window.innerHeight*1.77+"px";
+            this.it.style.width = window.innerHeight*ratio+"px";
         }
 
         this.it.style.marginLeft = -(this.it.offsetWidth/2)+"px";

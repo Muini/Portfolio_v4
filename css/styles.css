@@ -492,6 +492,7 @@ p {
 	margin: 0;
     letter-spacing: 0.05em;
     text-shadow: 0 0 20px rgba(0,0,0,0.2),0 1px 0px rgba(255,255,255,0.6);
+    text-align: left;
 }
 
 a,a:active,a:visited {
@@ -718,6 +719,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     vertical-align: middle;
 }
 
+#page_home>p{
+    text-align: center;
+}
 .title_page{
     font-size: 4.5rem;
     letter-spacing: 0.2em;
@@ -748,6 +752,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
 }
 .scroll_down>span{
     font-size: 1.8rem;
+    cursor: pointer;
     
     animation: anim 2s infinite;
     -webkit-animation: anim 2s infinite;
@@ -774,11 +779,37 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
 	100% {-ms-transform: translateY(0px);}
 }
 
+.collumn{
+    display:table-cell;
+    width: 50%;
+}
+
+/* Tree of Skills */
+
+.node {
+    cursor: pointer;
+    stroke:  rgba(0,0,0,0.6);
+    fill: rgba(0,0,0,0.1);
+    stroke-width: 1px;
+}
+.node:hover{
+    fill: rgba(0,0,0,0.2);
+}
+
+.link {
+    fill: none;
+    stroke: #000;
+    opacity: 0.3;
+    stroke-width: 1px;
+}
+
+    
+/* Bonhomme */
 .bonhomme{
     position: absolute;
     right: 8%;
     bottom: 5%;
-    opacity: 0.8;
+    opacity: 0;
 }
 .bonhomme>img{
     width: 80px;   
