@@ -349,7 +349,7 @@ var portfolio = {
             
             it.force = d3.layout.force()
             .on("tick", this.tick)
-            .charge(function(d) { return -250*it.h/1000; }) //100 : -30
+            .charge(function(d) { return -300*it.h/1000; }) //100 : -30
             .linkDistance(function(d) { return 30*it.h/1000; })
             .size([this.w/1.5, this.h/1.2])
             ;
@@ -389,20 +389,42 @@ var portfolio = {
             // Enter any new nodes.
             it.node.enter().append("path")
                 .attr("class", "node")
-                //.attr("transform", function(d) { return "translate(" + it.w/2 + "," + (it.h - 30) + ")"; })
-                //.attr("r", function(d) { return d.children ? 4.5 : Math.sqrt(d.size) / 10; })
-                //.style("fill", color)
+                .style("fill", it.color)
                 .attr("d", d3.svg.symbol().size(0).type("diamond"))
+                .attr("data",function(d){ return d.name; })
                 .on("mouseover", it.hover)
                 .call(it.force.drag)
                 .transition()
-                    .delay(function(d,i){ return 500+(20*i); })
-                    .duration(600)
-                    .attr("d", d3.svg.symbol().size(function(d) { return d.children ? d.size/60 : d.size/6; }).type("diamond"))
+                    .delay(function(d,i){ return 600+(40*(it.nodes.length-i)); })
+                    .duration(900)
+                    .attr("d", d3.svg.symbol().size(function(d) { return d.children ? d.size/50 : d.size/5; }).type("diamond"))
             ;
 
             // Exit any old nodes.
             it.node.exit().remove();
+            
+            document.querySelector("#tree_of_skills>svg").lastChild.remove();
+            
+            var gradient = it.vis.append("svg:defs")
+              .append("svg:linearGradient")
+                .attr("id", "gradient_line")
+                .attr("x1", "0%")
+                .attr("y1", "0%")
+                .attr("x2", "100%")
+                .attr("y2", "100%")
+                .attr("spreadMethod", "pad");
+            gradient.append("svg:stop")
+                .attr("offset", "0%")
+                .attr("stop-color", "black")
+                .attr("stop-opacity", 0);
+            gradient.append("svg:stop")
+                .attr("offset", "50%")
+                .attr("stop-color", "black")
+                .attr("stop-opacity", 0.3);
+            gradient.append("svg:stop")
+                .attr("offset", "100%")
+                .attr("stop-color", "black")
+                .attr("stop-opacity", 0);
             
             // Update the links…
             it.link = it.vis.selectAll("line.link")
@@ -416,11 +438,11 @@ var portfolio = {
                 .attr("x2", function(d) { return d.target.x; })
                 .attr("y2", function(d) { return d.target.y; })
                 .attr("opacity", "0")
+                //.attr("stroke","url(#gradient_line)")
                 .transition()
-                    .delay(function(d,i){ return 500+(20*i); })
+                    .delay(function(d,i){ return 600+(30*(it.nodes.length-i)); })
                     .duration(600)
                     .attr("opacity", "1")
-            
             ;
 
             // Exit any old links.
@@ -442,26 +464,46 @@ var portfolio = {
         },
         
         resize: function(){
-            
-//            var it = portfolio.treeOfSkills;
-//            
-//            it.w = window.innerWidth;
-//            it.h = window.innerHeight;
-//            it.vis.attr("width", it.w).attr("height", it.h);
-//            //d3.select("#tree_of_skills>svg").attr("transform","scale(1)");
+            //Need to refresh :/
         },
 
         color: function(d) {
+        
+//            var color1 = "hsl(" + ( 100 + Math.random() * 100 ) + ",30%,80%)"; //de 200 à 360
+//            //var color1 = "hsl(" + ( 10 + d.size/31 ) + ",60%,70%)"; //de 200 à 360
+//            var color2 = "hsl(" + ( 150 + Math.random() * 100 ) + ",20%,40%)"; //de 200 à 360
+//            //var color2 = "hsl(" + ( d.size/50 ) + ",60%,70%)"; //de 200 à 360
+//            
+//            var gradient = portfolio.treeOfSkills.vis.append("svg:defs")
+//              .append("svg:linearGradient")
+//                .attr("id", "gradient"+d.size)
+//                .attr("x1", "0%")
+//                .attr("y1", "0%")
+//                .attr("x2", "50%")
+//                .attr("y2", "100%")
+//                .attr("spreadMethod", "pad");
+//            gradient.append("svg:stop")
+//                .attr("offset", "0%")
+//                .attr("stop-color", color2)
+//                .attr("stop-opacity", d.children ? 0.2*d.size/6000 : 0.6*d.size/2500 );
+//            gradient.append("svg:stop")
+//                .attr("offset", "100%")
+//                .attr("stop-color", color1)
+//                .attr("stop-opacity", d.children ? 0.4*d.size/6000 : 0.9*d.size/2500 );
+//            
+//            return "url(#gradient"+d.size+")";
             
-            return d._children ? "#333333" : d.children ? "#111111" : "#333333";
+            var color1 = "hsla(100,0%," + ( 30 + Math.random() * 30 ) + "%, 100)"; //de 200 à 360
+            
+            return color1;
             
         },
 
         // Toggle children on click.
         hover: function(d) {
             
-            //Draw content
-            
+            //Draw content            
+            document.querySelector("#skills_description>h2").innerHTML = d.name;
             
         },
 
