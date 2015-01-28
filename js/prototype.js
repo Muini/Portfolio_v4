@@ -559,12 +559,12 @@ var video = {
 //            }
 //        }
         
-        this.it.oncanplay = function(){
-            this.currentTime = 0;
+        setTimeout(function(){
+            it.it.currentTime = 0;
             it.maj_bar();
-            this.volume = 0.8;
-            this.play();
-        }
+            it.it.volume = 0.8; //0.8 to change for launching
+            it.it.play();
+        }, 1000);
         
         //Son
         document.querySelector('.toggle_sound').onclick = function(){
@@ -749,7 +749,6 @@ this.onkeydown = function(e){
         return false;
     }
 }
-
 
 
 

@@ -4,7 +4,7 @@
 	<div id="wrapper">
 
         <div id="wrapper_video">
-            <video id="video_bg" preload="auto" autoplay loop muted>
+            <video id="video_bg" preload="auto" loop muted>
                 <source src="vid/bg_vid.mp4"type="video/mp4" />
 <!--					<source src="vid/bg_vid.webm"type="video/webm" />-->
                 Your browser does not support the video tag. You need to update your browser or change it :/
@@ -23,6 +23,7 @@
         </header>
 
         <section id="container">
+            <canvas id="canvas"></canvas>
            
             <section id="page_home" class="page hidden"></section>
             

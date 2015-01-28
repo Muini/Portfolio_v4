@@ -42,15 +42,19 @@
             },
             {
               "name": "lighting",
-              "size": 2000
+              "size": 1500
             },
             {
               "name": "shooting",
-              "size": 4000
+              "size": 3000
+            },
+            {
+              "name": "photography",
+              "size": 4000  
             },
             {
               "name": "sound_taking",
-              "size": 2500
+              "size": 2000
             },
             {
               "name": "acting",

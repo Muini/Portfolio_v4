@@ -859,7 +859,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     position: absolute;
     right: 8%;
     bottom: 5%;
-    opacity: 0;
+    opacity: 0.8;
 }
 .bonhomme>img{
     width: 80px;   
