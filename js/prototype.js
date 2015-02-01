@@ -750,6 +750,140 @@ this.onkeydown = function(e){
     }
 }
 
+/* CANVAS */
+
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+var hidefCanvasWidth;
+var hidefCanvasHeight;
+
+//Init
+var settings = {};
+settings.displaySizeX = hidefCanvasWidth;
+settings.displaySizeY = hidefCanvasHeight;
+settings.maxIncrement = 1;
+settings.numAgents = 10;
+//settings.colors = ["150,250,200","100,200,150","100,200,250","100,250,70"];
+//settings.colors = ["50,150,250","0,100,200","0,50,100","100,200,250"];
+settings.colors = ["50,150,250","0,100,200","0,50,100","100,200,250","150,250,200","100,200,150","100,200,250","100,250,70"];
+//settings.colors = ["50,50,50","100,100,100","150,150,150","200,200,200"];
+
+//settings.colors = ["115,110,116","105,77,63","228,240,228"];
+//settings.colors = ["33,33,87","69,185,176","135,0,7","95,50,117"];
+settings.agentAlpha = 0.2;
+settings.agentSize = 4;
+
+function canvasSizing(){
+    hidefCanvasWidth = window.innerWidth;
+    hidefCanvasHeight = window.innerHeight; 
+    
+    if (window.devicePixelRatio) {
+        canvas.width = hidefCanvasWidth * window.devicePixelRatio;
+        canvas.height = hidefCanvasHeight * window.devicePixelRatio;
+        canvas.style.width = hidefCanvasWidth+"px";
+        canvas.style.height = hidefCanvasHeight+"px";
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);    
+    }else{
+        canvas.width = hidefCanvasWidth;
+        canvas.height = hidefCanvasHeight;   
+    } 
+
+    settings.displaySizeX = hidefCanvasWidth;
+    settings.displaySizeY = hidefCanvasHeight;
+}
+
+canvasSizing();
+
+window.onresize = function(){
+    canvasSizing();
+}
+
+function createAgent(){
+
+    var agent = {};
+
+    agent.x = Math.random() * settings.displaySizeX;
+    agent.y = Math.random() * settings.displaySizeY;
+    agent.xIncrement = (Math.random() * 0.4 - 0.2) * settings.maxIncrement;
+    agent.yIncrement = (Math.random() * 0.4 - 0.2) * settings.maxIncrement;
+    agent.color = settings.colors[Math.floor(Math.random() * settings.colors.length)];
+    
+    agent.draw = function(){
+
+        //Rectangle
+        //ctx.fillStyle = "rgba(255,255,255,1)";
+        //ctx.fillRect(agent.x, agent.y, 2, 2);
+        agent.x += agent.xIncrement ;
+        agent.y += agent.yIncrement ;
+
+        if(agent.x <= 0){
+//          agent.x += 10;
+            agent.x = settings.displaySizeX;
+            //agent.y *= -1;
+        }else if(agent.y <= 0){
+//          agent.y += 10;
+            agent.y = settings.displaySizeY;
+            //agent.x *= -1;
+        }else if(agent.x >= settings.displaySizeX){
+//          agent.x -= 10;
+            agent.x = 0;
+            //agent.y *= -1;
+        }else if(agent.y >= settings.displaySizeY){
+//          agent.y -= 10;
+            agent.y = 0;
+            //agent.x *= -1;
+        }
+    };
+    return agent;
+};
+
+var myAgent = [];
+
+for(var i=0; i<settings.numAgents; i++)
+{
+    myAgent.push(createAgent());
+}           
+
+function step(){
+    //Effacer l'écran
+    //ou clearRect
+    ctx.clearRect(0,0, settings.displaySizeX, settings.displaySizeY);
+    
+    // Get Delaunay triangles
+    var triangles = Delaunay.triangulate(myAgent);
+   
+    // Draw triangles
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.2 )";
+    for(i = 0; i < triangles.length; i += 3) {
+        
+        var a1 = myAgent[triangles[i]];
+        var a2 = myAgent[triangles[i + 1]];
+        var a3 = myAgent[triangles[i + 2]];
+        ctx.beginPath();
 
 
+        var grad = ctx.createLinearGradient(a1.x,a1.y,a2.x,a2.y);
+        grad.addColorStop(1,"rgba("+a1.color+",0.15)");
+        grad.addColorStop(0.5,"rgba("+a2.color+",0)");
+        grad.addColorStop(0,"rgba("+a3.color+",0.25)");
+        ctx.fillStyle = grad;
+
+        ctx.moveTo(a1.x, a1.y);
+        ctx.lineTo(a2.x, a2.y);
+        ctx.lineTo(a3.x, a3.y);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.fill();
+    }
+    myAgent.forEach(function(a){
+        a.draw();
+    });
+
+    requestAnimationFrame(step);
+};
+
+//var timer = setInterval(step, 1000/60); //60 fps
+
+requestAnimationFrame(step);
 
