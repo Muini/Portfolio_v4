@@ -39,8 +39,8 @@
                 <span id="navProgress_bar"></span>
             </nav>
             
-            <div class="bonhomme">
-                <img src="img/bonhomme.png" />
+            <div id="bonhomme" class="animContainer">
+                <div id="bonhomme_anim"></div>
             </div>
        
         </section>

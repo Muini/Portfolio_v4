@@ -113,6 +113,10 @@
             {
               "name": "technical_watch",
               "size": 2000
+            },
+            {
+              "name": "graphical_watch",
+              "size": 2000
             }
           ]
         },
@@ -140,33 +144,11 @@
               "children": [
                 {
                   "name": "html5_css3",
-                  "size": 4000
+                  "size": 4500
                 },
                 {
                   "name": "javascript",
-                  "size": 5000,
-                  "children": [
-                    {
-                      "name": "jquery",
-                      "size": 3000
-                    },
-                    {
-                      "name": "gsap",
-                      "size": 3000
-                    },
-                    {
-                      "name": "d3js",
-                      "size": 3000
-                    },
-                    {
-                      "name": "snap_svg",
-                      "size": 1000
-                    },
-                    {
-                      "name": "video_js",
-                      "size": 3000
-                    }
-                  ]
+                  "size": 5000
                 },
                 {
                   "name": "responsiv",

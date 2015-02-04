@@ -150,7 +150,8 @@ var portfolio = {
                         page_togo.style.opacity = 0;
                         page_togo.innerHTML = data;
                         page_togo.setAttribute("data-loaded","");
-
+                        
+                        //First Launch is the when we arrived on the website
                         if(it.first_launch){
                             //Delete de beforeLoad then draw the page then UI elements
                             setTimeout(function(){
@@ -164,6 +165,9 @@ var portfolio = {
                                         TweenMax.to(navProgress,0.6,{x:0});
                                         TweenMax.staggerTo(controls,0.6,{y:0, ease:Elastic.easeOut},0.05);
                                     });
+                                    //Init THE bonhomme !
+                                    bonhomme.init();
+                                    //Play the eventual specific page animation
                                     it.specificPageAction(name);
                                 }});
                                 
@@ -696,6 +700,79 @@ var audio = {
 
 var bonhomme = {
     
+    timer: null,
+    currentbgx: 0,
+    elem: null,
+    
+    width: 320,
+    height: 320,
+    
+    //Initialization the div where the bonhomme is, the current anim (in then idle) and the position on the screen.
+    init: function(){
+        //Init the bonhomme only on big screen
+        if(window.innerWidth>640 && window.innerHeight>480)
+        {
+            this.elem = document.getElementById('bonhomme_anim');
+            this.elem.parentNode.style.display = 'block';
+            this.play(0,20,12,false,null);
+        }
+    },
+    
+    // The play function can play any animation of the bonhomme at any time cutting the current animation.
+    // line = line number of the animation, start at 0
+    // length = line length in image
+    // fps = frame per second
+    // reverse = boolean that play reverse animation
+    // callback = callback function when the animation is finished. Always play Idle animation in case callback is nothing. (so it's idle is looping)
+    play: function(line,length,fps,reverse,callback){
+        
+        var it = this;
+        
+        it.stop();
+        if(reverse)
+            it.currentbgx = - length * it.width;
+        else
+            it.currentbgx = 0;
+        it.elem.style.backgroundPosition = it.currentbgx + "px "+( line * it.height )+"px";
+        if(it.timer == null)
+        {
+            it.timer = setInterval(function(){
+                it.startAnim(line,length,reverse,callback);
+            }, (1000/fps));
+        }
+        
+    },
+    
+    startAnim: function(line,length,reverse,callback){
+                  
+        var it = this;
+        
+        it.elem.style.backgroundPosition = it.currentbgx + "px "+( line * it.height )+"px";
+        if(reverse)
+        {
+            it.currentbgx += it.width;
+        }else{
+            it.currentbgx -= it.width;
+        }
+        
+        if (it.currentbgx < -(it.width*length) || it.currentbgx >= 0) {
+            it.play(0,20,12,false,null); //If the animation is finished, it return on idle state. The callback will still be executed.
+            if(callback)
+                callback();
+        } 
+    },
+    
+    // Stop the animation
+    stop: function(){
+        clearInterval(this.timer);
+        this.timer = null;
+    },
+    
+    //Can move the bonhomme at x and y (in percent of the screen)
+    moveTo: function(x,y){
+        this.elem.parentNode.style.bottom = x+'%';
+        this.elem.parentNode.style.right = y+'%';
+    },
 }
 
 //==========================================
@@ -704,6 +781,7 @@ var bonhomme = {
 
 window.onresize = function(){ 
     portfolio.resize(); 
+    canvasSizing();
 };
 
 //Initialization of the website
@@ -755,6 +833,8 @@ this.onkeydown = function(e){
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
+var borderAgent = false;
+
 var hidefCanvasWidth;
 var hidefCanvasHeight;
 
@@ -763,7 +843,7 @@ var settings = {};
 settings.displaySizeX = hidefCanvasWidth;
 settings.displaySizeY = hidefCanvasHeight;
 settings.maxIncrement = 1;
-settings.numAgents = 10;
+settings.numAgents = 30;
 //settings.colors = ["150,250,200","100,200,150","100,200,250","100,250,70"];
 //settings.colors = ["50,150,250","0,100,200","0,50,100","100,200,250"];
 settings.colors = ["50,150,250","0,100,200","0,50,100","100,200,250","150,250,200","100,200,150","100,200,250","100,250,70"];
@@ -795,18 +875,38 @@ function canvasSizing(){
 
 canvasSizing();
 
-window.onresize = function(){
-    canvasSizing();
-}
-
 function createAgent(){
 
     var agent = {};
 
-    agent.x = Math.random() * settings.displaySizeX;
-    agent.y = Math.random() * settings.displaySizeY;
-    agent.xIncrement = (Math.random() * 0.4 - 0.2) * settings.maxIncrement;
-    agent.yIncrement = (Math.random() * 0.4 - 0.2) * settings.maxIncrement;
+    if(borderAgent)
+    {
+        switch(Math.floor(Math.random()*4)){
+            case 0:
+                agent.x = Math.random() * settings.displaySizeX;
+                agent.y = 0;
+                break;
+            case 1:
+                agent.x = Math.random() * settings.displaySizeX;
+                agent.y = settings.displaySizeY;   
+                break;
+            case 2:
+                agent.y = Math.random() * settings.displaySizeY;
+                agent.x = 0;
+                break;
+            case 3:
+                agent.y = Math.random() * settings.displaySizeY;
+                agent.x = settings.displaySizeX;
+                break;
+        }
+        agent.xIncrement = 0;
+        agent.yIncrement = 0;
+    }else{
+        agent.x = Math.random() * settings.displaySizeX;
+        agent.y = Math.random() * settings.displaySizeY;
+        agent.xIncrement = (Math.random() * 0.4 - 0.2) * settings.maxIncrement;
+        agent.yIncrement = (Math.random() * 0.4 - 0.2) * settings.maxIncrement;
+    }
     agent.color = settings.colors[Math.floor(Math.random() * settings.colors.length)];
     
     agent.draw = function(){
@@ -817,24 +917,27 @@ function createAgent(){
         agent.x += agent.xIncrement ;
         agent.y += agent.yIncrement ;
 
-        if(agent.x <= 0){
+        if(agent.x < 0){
 //          agent.x += 10;
             agent.x = settings.displaySizeX;
             //agent.y *= -1;
-        }else if(agent.y <= 0){
+        }else if(agent.y < 0){
 //          agent.y += 10;
             agent.y = settings.displaySizeY;
             //agent.x *= -1;
-        }else if(agent.x >= settings.displaySizeX){
+        }else if(agent.x > settings.displaySizeX){
 //          agent.x -= 10;
             agent.x = 0;
             //agent.y *= -1;
-        }else if(agent.y >= settings.displaySizeY){
+        }else if(agent.y > settings.displaySizeY){
 //          agent.y -= 10;
             agent.y = 0;
             //agent.x *= -1;
         }
     };
+    
+    borderAgent = !borderAgent;
+    
     return agent;
 };
 
@@ -864,16 +967,16 @@ function step(){
 
 
         var grad = ctx.createLinearGradient(a1.x,a1.y,a2.x,a2.y);
-        grad.addColorStop(1,"rgba("+a1.color+",0.15)");
+        grad.addColorStop(1,"rgba("+a1.color+",0.05)");
         grad.addColorStop(0.5,"rgba("+a2.color+",0)");
-        grad.addColorStop(0,"rgba("+a3.color+",0.25)");
+        grad.addColorStop(0,"rgba("+a3.color+",0.15)");
         ctx.fillStyle = grad;
 
         ctx.moveTo(a1.x, a1.y);
         ctx.lineTo(a2.x, a2.y);
         ctx.lineTo(a3.x, a3.y);
         ctx.closePath();
-        ctx.stroke();
+        //ctx.stroke();
         ctx.fill();
     }
     myAgent.forEach(function(a){
