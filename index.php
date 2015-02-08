@@ -6,7 +6,7 @@
         <div id="wrapper_video">
             <video id="video_bg" preload="auto" loop muted>
                 <source src="vid/bg_vid.mp4"type="video/mp4" />
-<!--					<source src="vid/bg_vid.webm"type="video/webm" />-->
+<!--			<source src="vid/bg_vid.webm"type="video/webm" />-->
                 Your browser does not support the video tag. You need to update your browser or change it :/
             </video>
         </div>

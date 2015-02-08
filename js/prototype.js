@@ -843,13 +843,13 @@ var settings = {};
 settings.displaySizeX = hidefCanvasWidth;
 settings.displaySizeY = hidefCanvasHeight;
 settings.maxIncrement = 1;
-settings.numAgents = 30;
+settings.numAgents = 20;
 //settings.colors = ["150,250,200","100,200,150","100,200,250","100,250,70"];
 //settings.colors = ["50,150,250","0,100,200","0,50,100","100,200,250"];
-settings.colors = ["50,150,250","0,100,200","0,50,100","100,200,250","150,250,200","100,200,150","100,200,250","100,250,70"];
+//settings.colors = ["50,150,250","0,100,200","0,50,100","100,200,250","150,250,200","100,200,150","100,200,250","100,250,70"];
 //settings.colors = ["50,50,50","100,100,100","150,150,150","200,200,200"];
 
-//settings.colors = ["115,110,116","105,77,63","228,240,228"];
+settings.colors = ["115,110,116","105,77,63","228,240,228"]; //Good
 //settings.colors = ["33,33,87","69,185,176","135,0,7","95,50,117"];
 settings.agentAlpha = 0.2;
 settings.agentSize = 4;
