@@ -507,8 +507,21 @@ var portfolio = {
         hover: function(d) {
             
             //Draw content            
-            document.querySelector("#skills_description>h2").innerHTML = d.name;
-            
+//            document.querySelector("#skills_description>h2").innerHTML = d.name;
+            var skills = document.querySelectorAll(".skill");
+            for(var i=0; i<skills.length; i++){
+                skills[i].className = "skill hidden";
+            }
+            var skill = document.querySelector("#s_"+d.name);
+            if(skill)
+            {
+                document.getElementById('skills_description').className = "hidden";  
+                skill.className = "skill";
+                //TweenMax.to(skill,0,{opacity:1});
+                //TweenMax.from(skill.querySelector('h2'),0.3,{x:'-100%',opacity:0});
+                //TweenMax.from(skill.querySelector('img'),0.9,{y:'-100%',opacity:0});
+                //TweenMax.from(skill.querySelector('p'),0.6,{x:'100%',opacity:0});
+            }
         },
 
         // Returns a list of all nodes under the root.

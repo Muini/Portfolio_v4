@@ -811,12 +811,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     text-align: right;
     margin-top: 80px;
 }
-#skills_description{
+#skills_description,.skill{
     max-width: 460px;
     min-width: 320px;
     float: right;
 }
-#skills_description>p{
+#skills_description>p,.skill>p{
     text-align: right;
 }
 #tree_of_skills{

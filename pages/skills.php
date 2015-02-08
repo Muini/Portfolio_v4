@@ -18,3 +18,20 @@ header('Content-Length: '.$filesize);
 <section id="tree_of_skills">
     <!-- Here come the tree ! -->
 </section>
+<section id="skills">
+    <div id="s_video" class="skill hidden">
+        <h2>Film Making / Video</h2>
+        <img src="./img/skills/s_video.png" alt="video" />
+        <p></p>
+    </div>
+    <div id="s_internet" class="skill hidden">
+        <h2>Internet</h2>
+        <img src="./img/skills/s_video.png" alt="video" />
+        <p></p>
+    </div>
+    <div id="s_3D" class="skill hidden">
+        <h2>3D</h2>
+        <img src="./img/skills/s_video.png" alt="video" />
+        <p></p>
+    </div>
+</section>
