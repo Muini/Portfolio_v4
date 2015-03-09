@@ -5,7 +5,7 @@
 
         <div id="wrapper_video">
             <video id="video_bg" preload="auto" loop muted>
-                <source src="vid/bg_vid.mp4"type="video/mp4" />
+<!--                <source src="vid/bg_vid.mp4" type="video/mp4" />-->
 <!--			<source src="vid/bg_vid.webm"type="video/webm" />-->
                 Your browser does not support the video tag. You need to update your browser or change it :/
             </video>
@@ -15,7 +15,11 @@
             <p id="noscript">Oops ! Javascript is desactivated ! Activate it for a full fonctionnal navigation !</p>
         </noscript>
         
-        <div id="beforeLoad"></div>
+        <div id="beforeLoad">
+            <div>
+                <img class='loader' src='img/loader.gif' alt='Loading' />
+            </div>
+        </div>
 
         <header id="header">
             <div id="loaderVid" class="loader_bar"></div>

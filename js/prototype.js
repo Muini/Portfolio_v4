@@ -2,7 +2,7 @@
 // Hey there, welcome to the dark face of my portfolio,
 // You can check my code if you want, it's just some weird functions
 // I'm using GSAP for animations, D3JS for the tree of skills and the rest is native javascript
-// If you still have a question : corentin.flach(at)gmail.com I doesn't bite... or maybe
+// If you still have a question : corentin.flach(at)gmail.com
 //=========================================================================================
 
 
@@ -39,6 +39,15 @@ var portfolio = {
         }else{
             this.goTo(this.getUrl());
         }
+        
+        //Delete gradient on Safari because it's ugly
+        var isSafari = /constructor/i.test(window.HTMLElement);
+        if(isSafari)
+        {
+            document.getElementById("header").style.background = "none";
+            document.getElementById("footer").style.background = "none";
+        }
+        
         
     },
     
@@ -153,8 +162,25 @@ var portfolio = {
                         
                         //First Launch is the when we arrived on the website
                         if(it.first_launch){
+                            //Test the computer performance with counting
+                            var start = new Date();
+                            for (var i=0; i<20000000; i++); 
+                            var end = new Date();
+                            var diff = end - start;
+                            console.log(diff+"ms");
+                                                                                       
+                            if(diff>40){
+                                //No Canvas
+                                document.getElementById("canvas").parentElement.removeChild(document.getElementById("canvas"));
+                            }
+                            
                             //Delete de beforeLoad then draw the page then UI elements
                             setTimeout(function(){
+                                
+                                if(diff>30){
+                                    //Stop vidéo
+                                    video.it.pause();   
+                                }
                                 
                                 TweenMax.to(document.getElementById('beforeLoad'),1,{opacity:0,onComplete:function(){
                                     document.getElementById('beforeLoad').style.display = "none";
@@ -171,7 +197,7 @@ var portfolio = {
                                     it.specificPageAction(name);
                                 }});
                                 
-                            },1000);
+                            },2000);
                             
                         }else{
                             //Just draw the page
@@ -201,7 +227,7 @@ var portfolio = {
         
     },
     
-    //Specific page script
+    //Specific page script when init
     specificPageAction: function(name){
         
         if(name == "skills")
@@ -210,15 +236,31 @@ var portfolio = {
     },
     
     animation: function(elem, out, callback){
-        
+        var tl = new TimelineMax({onComplete:callback});
         if(out){
             //Define Out animation
-            TweenMax.to(elem,.3,{opacity:0,onComplete:callback});
+            TweenMax.to(elem,.6,{y:"5%",opacity:0,onComplete:callback});
         }else{
             //Define In animation
-            TweenMax.to(elem,1,{opacity:1,onComplete:callback});
+            tl.add( TweenMax.to(elem,.3,{y:"0%",opacity:1}) );
+            if(elem.querySelectorAll(".title_site").length>0)
+                tl.add( TweenMax.from(elem.querySelectorAll(".title_site"), 1.9, {opacity:0,y:-20}) );
+            else if(elem.querySelectorAll("h1").length>0){
+                TweenMax.from(elem.querySelectorAll("h1"), 0.9, {opacity:0,x:-60});
+            }
+            if(elem.querySelectorAll(".sub_title").length>0)
+                tl.add( TweenMax.from(elem.querySelectorAll(".sub_title"), 0.6, {opacity:0,y:30}) );
+            else if(elem.querySelectorAll("h2").length>0)
+                tl.add( TweenMax.from(elem.querySelectorAll("h2"), 0.6, {opacity:0,y:-20}) );
+            if(elem.querySelectorAll("h3").length>0)
+                tl.add( TweenMax.from(elem.querySelectorAll("h3"), 0.3, {opacity:0,y:-20}) );
+            if(elem.querySelectorAll("span").length>0)
+                tl.add( TweenMax.staggerFrom(elem.querySelectorAll("span"),0.3, {opacity:0,y:-10},0.1) );
+            if(elem.querySelectorAll("img").length>0)
+                tl.add( TweenMax.staggerFrom(elem.querySelectorAll("img"),0.3, {opacity:0},0.1) );
+            if(elem.querySelectorAll("p").length>0)
+                tl.add( TweenMax.staggerFrom(elem.querySelectorAll("p"),0.3, {opacity:0,y:-10},0.1) );
         }
-        
     },
     
     //Routing stuff
@@ -273,7 +315,7 @@ var portfolio = {
             }
         };
         xmlhttp.onprogress = function(e){
-            //Custom add for having the state of loading for making a progress bar
+            //Custom add to have the state of loading to make a progress bar
             if (xmlhttp.readyState > 2)
             {
                 var totalBytes  = xmlhttp.getResponseHeader('Content-length');
@@ -556,6 +598,7 @@ var video = {
     init: function(){     
         
         this.it = document.getElementById("video_bg");
+        this.it.src = "vid/bg_vid.mp4";
         this.it.pause();
         this.it.addEventListener('timeupdate',this.maj_bar);
         this.resize();
@@ -982,7 +1025,7 @@ function step(){
         var grad = ctx.createLinearGradient(a1.x,a1.y,a2.x,a2.y);
         grad.addColorStop(1,"rgba("+a1.color+",0.05)");
         grad.addColorStop(0.5,"rgba("+a2.color+",0)");
-        grad.addColorStop(0,"rgba("+a3.color+",0.15)");
+        grad.addColorStop(0,"rgba("+a3.color+",0.1)");
         ctx.fillStyle = grad;
 
         ctx.moveTo(a1.x, a1.y);
