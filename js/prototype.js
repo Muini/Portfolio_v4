@@ -179,10 +179,11 @@ var portfolio = {
                                 
                                 if(diff>30){
                                     //Stop vidéo
-                                    video.it.pause();   
+                                    video.it.pause();
+                                    video.it.src = "";
                                 }
                                 
-                                TweenMax.to(document.getElementById('beforeLoad'),1,{opacity:0,onComplete:function(){
+                                TweenMax.to(document.getElementById('beforeLoad'),1,{x:"-100%",onComplete:function(){
                                     document.getElementById('beforeLoad').style.display = "none";
                                     it.animation(page_togo,false,function(){
                                         it.canNavigate = true;
@@ -194,7 +195,7 @@ var portfolio = {
                                     //Init THE bonhomme !
                                     bonhomme.init();
                                     //Play the eventual specific page animation
-                                    it.specificPageAction(name);
+                                    it.specificPageAction(name,false);
                                 }});
                                 
                             },2000);
@@ -204,7 +205,7 @@ var portfolio = {
                             it.animation(page_togo,false,function(){
                                 it.canNavigate = true;
                             });
-                            it.specificPageAction(name);
+                            it.specificPageAction(name,true);
                         }
 
                     });
@@ -214,6 +215,7 @@ var portfolio = {
                     it.animation(page_togo,false,function(){
                         it.canNavigate = true;
                     });
+                    it.specificPageAction(name,true);
                 }
             }
             
@@ -228,10 +230,28 @@ var portfolio = {
     },
     
     //Specific page script when init
-    specificPageAction: function(name){
+    specificPageAction: function(name,firstlaunch){
         
-        if(name == "skills")
-            portfolio.treeOfSkills.init();
+        if(name == "" || name == "home"){
+            if(!firstlaunch){
+                setTimeout(function(){
+                    bonhomme.play(2,23,12,false,null);
+                },1700);
+            }else{
+                bonhomme.play(2,23,12,false,null);
+            }
+        }else if(name == "howto"){
+            if(!firstlaunch){
+                setTimeout(function(){
+                    bonhomme.play(3,26,12,false,null);
+                },1700);
+            }else{
+                bonhomme.play(3,26,12,false,null);
+            }
+        }else if(name == "skills"){
+            if(!firstlaunch)
+                portfolio.treeOfSkills.init();
+        }
         
     },
     
@@ -765,12 +785,16 @@ var bonhomme = {
     
     //Initialization the div where the bonhomme is, the current anim (in then idle) and the position on the screen.
     init: function(){
+        var it = this;
         //Init the bonhomme only on big screen
         if(window.innerWidth>640 && window.innerHeight>480)
         {
-            this.elem = document.getElementById('bonhomme_anim');
-            this.elem.parentNode.style.display = 'block';
-            this.play(0,20,12,false,null);
+            it.elem = document.getElementById('bonhomme_anim');
+            it.elem.parentNode.style.display = 'block';
+            it.elem.style.backgroundPosition = it.width + "px " + it.height +"px";
+            setTimeout(function(){
+                it.play(1,12,12,true,null);
+            },500);
         }
     },
     
@@ -789,7 +813,7 @@ var bonhomme = {
             it.currentbgx = - length * it.width;
         else
             it.currentbgx = 0;
-        it.elem.style.backgroundPosition = it.currentbgx + "px "+( line * it.height )+"px";
+        it.elem.style.backgroundPosition = it.currentbgx + "px "+( line * -it.height )+"px";
         if(it.timer == null)
         {
             it.timer = setInterval(function(){
@@ -803,7 +827,7 @@ var bonhomme = {
                   
         var it = this;
         
-        it.elem.style.backgroundPosition = it.currentbgx + "px "+( line * it.height )+"px";
+        it.elem.style.backgroundPosition = it.currentbgx + "px "+( line * -it.height )+"px";
         if(reverse)
         {
             it.currentbgx += it.width;
@@ -812,7 +836,7 @@ var bonhomme = {
         }
         
         if (it.currentbgx < -(it.width*length) || it.currentbgx >= 0) {
-            it.play(0,20,12,false,null); //If the animation is finished, it return on idle state. The callback will still be executed.
+            it.play(0,15,6,false,null); //If the animation is finished, it return on idle state. The callback will still be executed.
             if(callback)
                 callback();
         } 
@@ -909,6 +933,7 @@ settings.colors = ["115,110,116","105,77,63","228,240,228"]; //Good
 //settings.colors = ["33,33,87","69,185,176","135,0,7","95,50,117"];
 settings.agentAlpha = 0.2;
 settings.agentSize = 4;
+settings.maxAgent = 80;
 
 function canvasSizing(){
     hidefCanvasWidth = window.innerWidth;
@@ -931,37 +956,45 @@ function canvasSizing(){
 
 canvasSizing();
 
-function createAgent(){
+function createAgent(m){
 
     var agent = {};
-
-    if(borderAgent)
+    
+    if(m)
     {
-        switch(Math.floor(Math.random()*4)){
-            case 0:
-                agent.x = Math.random() * settings.displaySizeX;
-                agent.y = 0;
-                break;
-            case 1:
-                agent.x = Math.random() * settings.displaySizeX;
-                agent.y = settings.displaySizeY;   
-                break;
-            case 2:
-                agent.y = Math.random() * settings.displaySizeY;
-                agent.x = 0;
-                break;
-            case 3:
-                agent.y = Math.random() * settings.displaySizeY;
-                agent.x = settings.displaySizeX;
-                break;
-        }
-        agent.xIncrement = 0;
-        agent.yIncrement = 0;
-    }else{
-        agent.x = Math.random() * settings.displaySizeX;
-        agent.y = Math.random() * settings.displaySizeY;
+        agent.x = m.clientX;
+        agent.y = m.clientY;
         agent.xIncrement = (Math.random() * 0.4 - 0.2) * settings.maxIncrement;
         agent.yIncrement = (Math.random() * 0.4 - 0.2) * settings.maxIncrement;
+    }else{
+        if(borderAgent)
+        {
+            switch(Math.floor(Math.random()*4)){
+                case 0:
+                    agent.x = Math.random() * settings.displaySizeX;
+                    agent.y = 0;
+                    break;
+                case 1:
+                    agent.x = Math.random() * settings.displaySizeX;
+                    agent.y = settings.displaySizeY;   
+                    break;
+                case 2:
+                    agent.y = Math.random() * settings.displaySizeY;
+                    agent.x = 0;
+                    break;
+                case 3:
+                    agent.y = Math.random() * settings.displaySizeY;
+                    agent.x = settings.displaySizeX;
+                    break;
+            }
+            agent.xIncrement = 0;
+            agent.yIncrement = 0;
+        }else{
+            agent.x = Math.random() * settings.displaySizeX;
+            agent.y = Math.random() * settings.displaySizeY;
+            agent.xIncrement = (Math.random() * 0.4 - 0.2) * settings.maxIncrement;
+            agent.yIncrement = (Math.random() * 0.4 - 0.2) * settings.maxIncrement;
+        }
     }
     agent.color = settings.colors[Math.floor(Math.random() * settings.colors.length)];
     
@@ -1001,8 +1034,16 @@ var myAgent = [];
 
 for(var i=0; i<settings.numAgents; i++)
 {
-    myAgent.push(createAgent());
+    myAgent.push(createAgent(null));
 }           
+
+document.getElementById("container").onclick = function(e){
+    if(myAgent.length<settings.maxAgent)
+    {
+        var mouse_e = e;
+        myAgent.push(createAgent(mouse_e));
+    }
+};
 
 function step(){
     //Effacer l'écran
