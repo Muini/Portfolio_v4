@@ -559,11 +559,6 @@ audio{
 	background: url(../img/pattern.jpg) no-repeat;
 	-ms-background-size: cover;
 	background-size: cover;
-    
-/*
-    -webkit-filter: grayscale(0.5) contrast(1);
-    filter: grayscale(0.5) contrast(1);
-*/
 }
 
 #wrapper_video {
@@ -795,10 +790,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     margin-top: 60px;
     display: inline-block;
     width: 33%;
+    vertical-align: top;
 }
 .important_words img {
     width: 50%;
     margin-bottom: 10px;
+}
+.important_words p{
+    text-align: center;
 }
 .scroll_down{
     margin-top: 30px;
@@ -894,7 +893,59 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     stroke-width: 1.5px;
 }
 
-    
+/* Production */
+#page_production>p{
+    text-align: center;
+}
+#projects{
+    margin-top: 60px;   
+}
+.a_project{
+    width:240px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 30px;
+}
+.a_project header{
+    margin-bottom: 30px;   
+}
+.p_status {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1rem;
+    margin-bottom: 20px;
+}
+.a_project hr{
+    display: block;
+    border: none;
+    border-bottom: 1px solid black;
+    margin: 10px auto;
+    width: 40px;
+}
+.a_project footer{
+    margin-top: 30px;   
+}
+.a_project footer p{
+    display: block;
+    float: left;
+    width: 50%;  
+    padding: 0 10px;
+}
+.p_title{
+       
+}
+.p_tools::before{
+    content: "Tools";
+    display: block;
+    font-weight: 800;
+    text-align: center;
+}
+.p_role::before{
+    content: "Role";
+    display: block;
+    font-weight: 800;  
+    text-align: center;
+}
 /* Bonhomme */
 #bonhomme{
     position: absolute;
@@ -990,7 +1041,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
     padding-top: 5px;
 }
 
-
+@media screen and (max-width: 1024px){
+    #controls{
+        display: none;   
+    }
+    #bonhomme{
+        display: none !important;   
+    }
+}
 @media screen and (max-width: 640px){
     #navProgress{
         left: -100%;
@@ -1000,11 +1058,5 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
     }
     #tree_of_skills{
         display: none;
-    }
-    #controls{
-        display: none;   
-    }
-    #bonhomme{
-        display: none;   
     }
 }

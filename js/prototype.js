@@ -183,7 +183,7 @@ var portfolio = {
                                     video.it.src = "";
                                 }
                                 
-                                TweenMax.to(document.getElementById('beforeLoad'),1,{x:"-100%",onComplete:function(){
+                                TweenMax.to(document.getElementById('beforeLoad'),1,{opacity:0,onComplete:function(){
                                     document.getElementById('beforeLoad').style.display = "none";
                                     it.animation(page_togo,false,function(){
                                         it.canNavigate = true;
@@ -249,8 +249,8 @@ var portfolio = {
                 bonhomme.play(3,26,12,false,null);
             }
         }else if(name == "skills"){
-            if(!firstlaunch)
-                portfolio.treeOfSkills.init();
+            document.getElementById("tree_of_skills").innerHTML = "";
+            portfolio.treeOfSkills.init();
         }
         
     },
