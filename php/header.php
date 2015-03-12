@@ -15,7 +15,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<title>Corentin Flach - Storyteller</title>
+		<title>Corentin Flach • Storyteller / Motion Designer / Front-end developer</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
@@ -27,29 +27,29 @@
 		
 		<meta name="author" content="Corentin Flach" />
 		<meta name="keywords" content="corentin,flach,flash,flache,director,writer,photographer,photo,webmaster,site,game,video,short,actinium,studio,draw,independant,webdesign,design,videos,designer,cinema,editing,communication,storyteller,VFX,web,tv,cartoon,infographic,animation,multimedia,2d,3d,film,films,pub,pubs,publicity" />
-		<meta name="description" content="Portfolio of Corentin Flach - Storytelling is my passion, i'm using a lot of things for doing it : writting, drawing, film making, editing, motion design, internet communication and programmation"/>
+		<meta name="description" content="Storytelling with film-making, motion design, interactive & creative front-end developement and bunch of other things, this is what I like and I do."/>
 		<link rel="canonical" href="http://corentinflach.fr/" />
 		<link rel="publisher" href="https://plus.google.com/105361402906060743268/posts"/>
 		<!-- Twitter -->
 		<meta name="twitter:card" content="summary_large_image">
 		<meta name="twitter:site" content="@CorentinFlach">
 		<meta name="twitter:creator" content="@CorentinFlach">
-		<meta name="twitter:title" content="Corentin Flach - Storyteller">
-		<meta name="twitter:description" content="Portfolio of Corentin Flach - Storytelling is my passion, i'm using a lot of things for doing it : writting, drawing, film making, editing, motion design, internet communication and programmation">
+		<meta name="twitter:title" content="Corentin Flach • Storyteller / Motion Designer / Front-end developer">
+		<meta name="twitter:description" content="Storytelling with film-making, motion design, interactive & creative front-end developement and bunch of other things, this is what I like and I do.">
 		<meta name="twitter:image:src" content="http://corentinflach.fr/img/pattern.jpg">
 		<meta name="twitter:domain" content="http://corentinflach.fr/">
         <!-- Facebook -->
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:locale:alternate" content="fr_FR" />
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content="Corentin Flach - Storyteller" />
-		<meta property="og:description" content="Portfolio of Corentin Flach - Storytelling is my passion, i'm using a lot of things for doing it : writting, drawing, film making, editing, motion design, internet communication and programmation" />
+		<meta property="og:title" content="Corentin Flach • Storyteller / Motion Designer / Front-end developer" />
+		<meta property="og:description" content="Storytelling with film-making, motion design, interactive & creative front-end developement and bunch of other things, this is what I like and I do." />
 		<meta property="og:url" content="http://corentinflach.fr/" />
-		<meta property="og:site_name" content="Corentin Flach - Storyteller" />
+		<meta property="og:site_name" content="Corentin Flach • Storyteller / Motion Designer / Front-end developer" />
 		<meta property="og:image" content="http://corentinflach.fr/img/pattern.jpg" />
 		<!-- Google Plus -->
-        <meta itemprop="name" content="Corentin Flach - Storyteller">
-        <meta itemprop="description" content="Portfolio of Corentin Flach - Storytelling is my passion, i'm using a lot of things for doing it : writting, drawing, film making, editing, motion design, internet communication and programmation">
+        <meta itemprop="name" content="Corentin Flach • Storyteller / Motion Designer / Front-end developer">
+        <meta itemprop="description" content="Storytelling with film-making, motion design, interactive & creative front-end developement and bunch of other things, this is what I like and I do.">
         <meta itemprop="image" content="http://corentinflach.fr/img/pattern.jpg">
 	</head>
 	

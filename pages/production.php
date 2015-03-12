@@ -1,6 +1,9 @@
-<?php    
-if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-    header('Location: ../#/production'); 
+<?php 
+if (!(array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER))){
+    include('../php/header.php'); 
+    if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+        header('Location: ../#/production');  
+    }
 }
 $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
 header('Content-Length: '.$filesize);
@@ -93,3 +96,8 @@ header('Content-Length: '.$filesize);
         </div>
     </section>
 </div>
+<?php
+if (!(array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER))){
+    include('../php/footer.php');   
+}
+?>

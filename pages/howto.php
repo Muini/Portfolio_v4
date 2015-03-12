@@ -1,6 +1,9 @@
-<?php    
-if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-    header('Location: ../#/howto'); 
+<?php
+if (!(array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER))){
+    include('../php/header.php');
+    if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+        header('Location: ../#/howto'); 
+    }
 }
 $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
 header('Content-Length: '.$filesize);
@@ -27,3 +30,8 @@ header('Content-Length: '.$filesize);
         <p>Observation, reflexion, comprehension, imagination & coffee</p>
     </span>
 </div>
+<?php
+if (!(array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER))){
+    include('../php/footer.php');   
+}
+?>

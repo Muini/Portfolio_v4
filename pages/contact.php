@@ -1,6 +1,9 @@
-<?php    
-if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-    header('Location: ../#/contact'); 
+<?php
+if (!(array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER))){
+    include('../php/header.php');
+    if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+        header('Location: ../#/contact'); 
+    }
 }
 $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
 header('Content-Length: '.$filesize);
@@ -18,3 +21,8 @@ header('Content-Length: '.$filesize);
     <a href="http://www.linkedin.com/in/corentinflach" target="_blank"><span class="icon-linkedin-squared"></span></a>
     <a href="http://plus.google.com/+CorentinFlach" rel="author" target="_blank"><span class="icon-gplus-squared"></span></a>
 </div>
+<?php
+if (!(array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER))){
+    include('../php/footer.php');   
+}
+?>

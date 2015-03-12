@@ -1,6 +1,9 @@
-<?php    
-if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-    header('Location: ../#/skills'); 
+<?php
+if (!(array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER))){
+    include('../php/header.php');
+    if(strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
+        header('Location: ../#/skills');
+    }
 }
 $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
 header('Content-Length: '.$filesize);
@@ -21,17 +24,22 @@ header('Content-Length: '.$filesize);
 <section id="skills">
     <div id="s_video" class="skill hidden">
         <h2>Film Making / Video</h2>
-        <img src="./img/skills/s_video.png" alt="video" />
-        <p></p>
+        <div class="s_img"></div>
+        <p>Film making is one of my oldest hobby's. I've started with Lego stop motion and now i'm trying to create real short film with friends.</p>
     </div>
     <div id="s_internet" class="skill hidden">
         <h2>Internet</h2>
-        <img src="./img/skills/s_video.png" alt="video" />
+        <div class="s_img"></div>
         <p></p>
     </div>
     <div id="s_3D" class="skill hidden">
         <h2>3D</h2>
-        <img src="./img/skills/s_video.png" alt="video" />
+        <div class="s_img"></div>
         <p></p>
     </div>
 </section>
+<?php
+if (!(array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER))){
+    include('../php/footer.php');   
+}
+?>

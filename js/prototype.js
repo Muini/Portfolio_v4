@@ -276,10 +276,14 @@ var portfolio = {
                 tl.add( TweenMax.from(elem.querySelectorAll("h3"), 0.3, {opacity:0,y:-20}) );
             if(elem.querySelectorAll("span").length>0)
                 tl.add( TweenMax.staggerFrom(elem.querySelectorAll("span"),0.3, {opacity:0,y:-10},0.1) );
-            if(elem.querySelectorAll("img").length>0)
-                tl.add( TweenMax.staggerFrom(elem.querySelectorAll("img"),0.3, {opacity:0},0.1) );
+            if(elem.querySelectorAll(".a_project").length>0)
+                tl.add( TweenMax.staggerFrom(elem.querySelectorAll(".a_project"),0.3, {scale:0.9,opacity:0,y:-10},0.1) );
+            if(elem.querySelectorAll("hr").length>0)
+                tl.add( TweenMax.from(elem.querySelectorAll("hr"), 0.3, {width:0}) );
             if(elem.querySelectorAll("p").length>0)
                 tl.add( TweenMax.staggerFrom(elem.querySelectorAll("p"),0.3, {opacity:0,y:-10},0.1) );
+            if(elem.querySelectorAll("img").length>0)
+                tl.add( TweenMax.staggerFrom(elem.querySelectorAll("img"),0.3, {opacity:0},0.1) );
         }
     },
     

@@ -840,11 +840,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     margin-top: 80px;
 }
 #skills_description,.skill{
-    max-width: 460px;
+    max-width: 420px;
     min-width: 320px;
     float: right;
+    text-align: right;
 }
-#skills_description>p,.skill>p{
+#skills_description p,.skill p{
     text-align: right;
 }
 #tree_of_skills{
@@ -893,6 +894,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     stroke-width: 1.5px;
 }
 
+.s_img{
+    width: 100%;
+    height: 100px;
+    margin: 10px 0;
+    background: rgba(0,0,0,0.6);
+}
+
 /* Production */
 #page_production>p{
     text-align: center;
@@ -901,10 +909,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     margin-top: 60px;   
 }
 .a_project{
-    width:240px;
+    width:20%;
     display: inline-block;
     vertical-align: top;
-    margin: 0 30px;
+    margin: 0 3%;
 }
 .a_project header{
     margin-bottom: 30px;   
@@ -922,8 +930,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     margin: 10px auto;
     width: 40px;
 }
+.a_project .p_description{
+    display: none;   
+}
 .a_project footer{
-    margin-top: 30px;   
+    margin-top: 30px; 
+    display: none;
 }
 .a_project footer p{
     display: block;
