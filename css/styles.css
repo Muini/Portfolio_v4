@@ -906,16 +906,74 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     text-align: center;
 }
 #projects{
+    width:640px;
+    height: 300px;
+    margin: 0 auto;
     margin-top: 60px;   
 }
-.a_project{
-    width:20%;
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 3%;
+#projects_3D{
+    margin: 0 auto;
+    position: relative;
+    -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;  
+    -webkit-animation  : spinning 12s infinite linear;  
+            animation  : spinning 12s infinite linear;
 }
+@-webkit-keyframes spinning {
+  from {
+    -webkit-transform: rotateX(0deg) rotateY(0deg);
+            transform: rotateX(0deg) rotateY(0deg);
+  }
+  to{
+    -webkit-transform: rotateX(90deg) rotateY(360deg);
+            transform: rotateX(90deg) rotateY(360deg);
+  }
+}
+.a_project{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:640px;
+    height:300px;
+    display: block;
+    vertical-align: top;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.8);
+    -webkit-transform: translateZ(-320px);
+            transform: translateZ(-320px);
+}
+
+.a_project:nth-child(2) {
+  -webkit-transform: rotateY(60deg);
+      -ms-transform: rotateY(60deg);
+          transform: rotateY(60deg);
+}
+.a_project:nth-child(3) {
+  -webkit-transform: rotateY(120deg);
+      -ms-transform: rotateY(120deg);
+          transform: rotateY(120deg);
+}
+.a_project:nth-child(4) {
+  -webkit-transform: rotateY(180deg);
+      -ms-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+.a_project:nth-child(5) {
+  -webkit-transform: rotateY(240deg);
+      -ms-transform: rotateY(240deg);
+          transform: rotateY(240deg);
+}
+.a_project:nth-child(6) {
+  -webkit-transform: rotateY(300deg);
+      -ms-transform: rotateY(300deg);
+          transform: rotateY(300deg);
+}
+
 .a_project header{
-    margin-bottom: 30px;   
+    float: left;
+    width: 30%;  
 }
 .p_status {
     text-align: center;
@@ -931,17 +989,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     width: 40px;
 }
 .a_project .p_description{
-    display: none;   
+    width: 50%;
+    float: left;
+    display: none;
 }
 .a_project footer{
-    margin-top: 30px; 
+    width: 20%;
+    float: left;
     display: none;
 }
 .a_project footer p{
     display: block;
-    float: left;
-    width: 50%;  
-    padding: 0 10px;
+    font-size: 1.2rem;
 }
 .p_title{
        
