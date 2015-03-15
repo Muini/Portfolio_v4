@@ -48,13 +48,13 @@ var portfolio = {
             document.getElementById("footer").style.background = "none";
         }
         
-        
     },
     
     resize: function(){
         //Video always need to be perfect
         video.resize();
         this.treeOfSkills.resize();
+        bonhomme.scale();
     },
     
     nextPage: function(){
@@ -538,30 +538,6 @@ var portfolio = {
         },
 
         color: function(d) {
-        
-//            var color1 = "hsl(" + ( 100 + Math.random() * 100 ) + ",30%,80%)"; //de 200 à 360
-//            //var color1 = "hsl(" + ( 10 + d.size/31 ) + ",60%,70%)"; //de 200 à 360
-//            var color2 = "hsl(" + ( 150 + Math.random() * 100 ) + ",20%,40%)"; //de 200 à 360
-//            //var color2 = "hsl(" + ( d.size/50 ) + ",60%,70%)"; //de 200 à 360
-//            
-//            var gradient = portfolio.treeOfSkills.vis.append("svg:defs")
-//              .append("svg:linearGradient")
-//                .attr("id", "gradient"+d.size)
-//                .attr("x1", "0%")
-//                .attr("y1", "0%")
-//                .attr("x2", "50%")
-//                .attr("y2", "100%")
-//                .attr("spreadMethod", "pad");
-//            gradient.append("svg:stop")
-//                .attr("offset", "0%")
-//                .attr("stop-color", color2)
-//                .attr("stop-opacity", d.children ? 0.2*d.size/6000 : 0.6*d.size/2500 );
-//            gradient.append("svg:stop")
-//                .attr("offset", "100%")
-//                .attr("stop-color", color1)
-//                .attr("stop-opacity", d.children ? 0.4*d.size/6000 : 0.9*d.size/2500 );
-//            
-//            return "url(#gradient"+d.size+")";
             
             var color1 = "hsla(100,0%," + ( 30 + Math.random() * 30 ) + "%, 100)"; //de 200 à 360
             
@@ -572,8 +548,6 @@ var portfolio = {
         // Toggle children on click.
         hover: function(d) {
             
-            //Draw content            
-//            document.querySelector("#skills_description>h2").innerHTML = d.name;
             var skills = document.querySelectorAll(".skill");
             for(var i=0; i<skills.length; i++){
                 skills[i].className = "skill hidden";
@@ -583,10 +557,11 @@ var portfolio = {
             {
                 document.getElementById('skills_description').className = "hidden";  
                 skill.className = "skill";
-                //TweenMax.to(skill,0,{opacity:1});
-                //TweenMax.from(skill.querySelector('h2'),0.3,{x:'-100%',opacity:0});
-                //TweenMax.from(skill.querySelector('img'),0.9,{y:'-100%',opacity:0});
-                //TweenMax.from(skill.querySelector('p'),0.6,{x:'100%',opacity:0});
+                TweenMax.to(skill.querySelectorAll('h2,.s_img,p'),0,{y:'20px',opacity:0});
+                
+                TweenMax.to(skill.querySelectorAll('h2'),0.3,{y:'0px',opacity:1});
+                TweenMax.to(skill.querySelectorAll('.s_img'),0.6,{y:'0px',opacity:1});
+                TweenMax.to(skill.querySelectorAll('p'),0.3,{y:'0px',opacity:1});
             }
         },
 
@@ -632,16 +607,6 @@ var video = {
         var loader_bar = document.getElementById('loaderVid');
         
         TweenMax.to(loader_bar,0,{opacity:1,width:0});
-        
-//        this.it.onprogress = function(e){
-//            var buffer = it.getPercentBuffered();
-//            
-//            if( buffer >= 100 ){
-//                TweenMax.to(loader_bar,1,{opacity:0,width:"100%"});
-//            }else if(buffer > 0){
-//                TweenMax.to(loader_bar,0.3,{width:buffer+"%"});
-//            }
-//        }
         
         setTimeout(function(){
             it.it.currentTime = 0;
@@ -796,6 +761,7 @@ var bonhomme = {
             it.elem = document.getElementById('bonhomme_anim');
             it.elem.parentNode.style.display = 'block';
             it.elem.style.backgroundPosition = it.width + "px " + it.height +"px";
+            it.scale();
             setTimeout(function(){
                 it.play(1,12,12,true,null);
             },500);
@@ -857,6 +823,19 @@ var bonhomme = {
         this.elem.parentNode.style.bottom = x+'%';
         this.elem.parentNode.style.right = y+'%';
     },
+    
+    scale: function(){
+        var scale = (window.innerHeight * 0.8 / 1200) + 0.1;
+        var bottom = -14 + Math.exp((document.getElementById("bonhomme").offsetHeight*scale*2.3) / (320*0.7));
+        console.log(bottom);
+        console.log();
+        if(scale>0.8)
+            scale = 0.8;
+        else if(scale<0.5)
+            scale = 0.5;
+        document.getElementById("bonhomme").style.bottom = bottom+"%";
+        TweenMax.to(document.querySelector(".animContainer"),0.3,{scale:scale});   
+    }
 }
 
 //==========================================

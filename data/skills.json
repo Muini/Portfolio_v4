@@ -19,10 +19,6 @@
               "size": 4000
             },
             {
-              "name": "shooting_script",
-              "size": 1000
-            },
-            {
               "name": "storyboard",
               "size": 3000
             },
@@ -206,17 +202,7 @@
         },
         {
           "name": "texturing",
-          "size": 2000,
-          "children": [
-            {
-              "name": "unwrapping",
-              "size": 1500
-            },
-            {
-              "name": "texturing",
-              "size": 2000
-            }
-          ]
+          "size": 2000
         },
         {
           "name": "animation",
