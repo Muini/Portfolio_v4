@@ -151,7 +151,7 @@ var portfolio = {
                     //Put Loader
                     page_togo.innerHTML = "<img class='loader' src='"+url+"img/loader.gif' alt='Loading' />";            
 
-                    url += "/pages/"+name+".php";
+                    url += "pages/"+name+".php";
 
                     it.ajaxGet( url, function(data){
                         
@@ -419,7 +419,7 @@ var portfolio = {
             
             it.force = d3.layout.force()
             .on("tick", this.tick)
-            .charge(function(d) { return -300*it.h/1000; }) //100 : -30
+            .charge(function(d) { return -350*it.h/1000; }) //100 : -30
             .linkDistance(function(d) { return 30*it.h/1000; })
             .size([this.w/1.5, this.h/1.2])
             ;
@@ -467,7 +467,7 @@ var portfolio = {
                 .transition()
                     .delay(function(d,i){ return 600+(40*(it.nodes.length-i)); })
                     .duration(900)
-                    .attr("d", d3.svg.symbol().size(function(d) { return d.children ? d.size/50 : d.size/5; }).type("diamond"))
+                    .attr("d", d3.svg.symbol().size(function(d) { return d.children ? d.size/30 : d.size/3; }).type("diamond"))
             ;
 
             // Exit any old nodes.

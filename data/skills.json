@@ -45,10 +45,6 @@
               "size": 3000
             },
             {
-              "name": "photography",
-              "size": 4000  
-            },
-            {
               "name": "sound_taking",
               "size": 2000
             },
@@ -58,7 +54,7 @@
             },
             {
               "name": "fun",
-              "size": 4000
+              "size": 3000
             }
           ]
         },
@@ -67,7 +63,7 @@
           "size": 5000,
           "children": [
             {
-              "name": "Editing",
+              "name": "editing",
               "size": 5000
             },
             {
@@ -83,10 +79,6 @@
               "size": 2000
             },
             {
-              "name": "music",
-              "size": 1000
-            },
-            {
               "name": "publication",
               "size": 1000
             }
@@ -99,16 +91,12 @@
       "size": 5000,
       "children": [
         {
-          "name": "ideation",
+          "name": "web_ideation",
           "size": 4000,
           "children": [
             {
               "name": "technology_watch",
               "size": 4000
-            },
-            {
-              "name": "technical_watch",
-              "size": 2000
             },
             {
               "name": "graphical_watch",
@@ -159,30 +147,12 @@
                 {
                   "name": "ruby_on_rails",
                   "size": 1000
+                },
+                {
+                  "name": "wordpress",
+                  "size": 1000
                 }
               ]
-            }
-          ]
-        },
-        {
-          "name": "communication",
-          "size": 3000,
-          "children": [
-            {
-              "name": "strategy",
-              "size": 1500
-            },
-            {
-              "name": "creation",
-              "size": 3000
-            },
-            {
-              "name": "publicity",
-              "size": 1000
-            },
-            {
-              "name": "social_network",
-              "size": 2000
             }
           ]
         }

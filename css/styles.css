@@ -841,8 +841,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     margin-top: 80px;
 }
 #skills_description,.skill{
-    max-width: 420px;
-    min-width: 320px;
+    width: 460px;
     float: right;
     text-align: right;
 }
@@ -853,7 +852,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     font-size: 1.4rem;
     line-height: 2.1rem;
     font-weight: 400;
-    border-bottom: 2px solid rgba(0,0,0,0);
+    border-bottom: 1px dashed rgba(0,0,0,0.4);
     -webkit-transition: border .3s ease;
     transition: border .3s ease;
 }
