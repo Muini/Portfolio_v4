@@ -51,12 +51,11 @@
 
         <footer id="footer">
             <nav id="controls">
-                <a><span class="icon-signal toggle_sound"></span></a>
+                <a class="toggle_sound"><span></span><span></span><span></span><span></span><span></span></a>
                 <a class="btn_music" data-music="music/music_jazz.mp3">▲</a>
                 <a class="btn_music" data-music="music/music_film.mp3">▼</a>
-                <a class="btn_music" data-music="music/music_street.mp3">▲</a>
-                <a class="btn_music" data-music="music/music_vacances.mp3">▼</a>
-                <a class="btn_music" data-music="music/music_hardrock.mp3">▲</a>
+                <a class="btn_music" data-music="music/music_vacances.mp3">▲</a>
+                <a class="btn_music" data-music="music/music_hardrock.mp3">▼</a>
             </nav>
             <div id="progressBar"></div>
         </footer>

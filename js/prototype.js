@@ -232,27 +232,67 @@ var portfolio = {
     //Specific page script when init
     specificPageAction: function(name,firstlaunch){
         
+        //Reset position of bonhomme
+        bonhomme.moveTo(10);
+        
         if(name == "" || name == "home"){
+            
+            var delay = 0;
             if(!firstlaunch){
-                setTimeout(function(){
-                    bonhomme.play(2,23,12,false,null);
-                },1700);
-            }else{
+                delay = 1700;
+            }
+            setTimeout(function(){
                 bonhomme.play(2,23,12,false,null);
-            }
+            },delay);
+            
         }else if(name == "howto"){
+            
+            var delay = 0;
             if(!firstlaunch){
-                setTimeout(function(){
-                    bonhomme.play(3,26,12,false,null);
-                },1700);
-            }else{
-                bonhomme.play(3,26,12,false,null);
+                delay = 1700;
             }
+            setTimeout(function(){
+                bonhomme.play(3,26,12,false,null);
+            },delay);
+            
         }else if(name == "skills"){
-            document.getElementById("tree_of_skills").innerHTML = "";
-            portfolio.treeOfSkills.init();
+            
+            var delay = 0;
+            if(!firstlaunch){
+                delay = 1700;
+            }
+            
+            //Delete Tree of Skills
+            document.getElementById("tree_of_skills").innerHTML = "";   
+            
+            setTimeout(function(){
+                //Téléportation out
+                bonhomme.play(1,12,12,false,function(){
+                    //Goto tree
+                    bonhomme.moveTo(66);
+                    //Teleport In
+                    bonhomme.play(1,12,12,true,function(){
+                        //Create tree
+                        setTimeout(function(){ portfolio.treeOfSkills.init(); },250);
+                        bonhomme.play(4,19,12,false,function(){
+                            //Teleport Out
+                            bonhomme.play(1,12,12,false,function(){
+                                //Go to Default
+                                bonhomme.moveTo(10);
+                                //Teleport In
+                                bonhomme.play(1,12,12,true,null);
+                            });
+                        });
+                    });
+                });
+            },delay);            
+            
         }else if(name == "production"){
+            
             portfolio.projectsNav.init();
+            
+        }else if(name == "contact"){
+            
         }
         
     },
@@ -283,9 +323,31 @@ var portfolio = {
             if(elem.querySelectorAll("hr").length>0)
                 tl.add( TweenMax.from(elem.querySelectorAll("hr"), 0.3, {width:0}) );
             if(elem.querySelectorAll("p").length>0)
-                tl.add( TweenMax.staggerFrom(elem.querySelectorAll("p"),0.3, {opacity:0,y:-10},0.1) );
+                tl.add( TweenMax.staggerFrom(elem.querySelectorAll("p"),0.3, {opacity:0,y:-10},0.05) );
             if(elem.querySelectorAll("img").length>0)
-                tl.add( TweenMax.staggerFrom(elem.querySelectorAll("img"),0.3, {opacity:0},0.1) );
+                tl.add( TweenMax.staggerFrom(elem.querySelectorAll("img"),0.3, {opacity:0},0.05) );
+            //Special animation for SVG
+            var svgs = elem.querySelectorAll("svg");
+            if(svgs.length>0)
+            {
+                var paths = elem.querySelectorAll(".path");
+                for(var i=0; i<paths.length; i++)
+                {
+                    var length_path = paths[i].getTotalLength();
+                    paths[i].style.strokeDashoffset = length_path;
+                    paths[i].style.strokeDasharray = length_path+" "+length_path;
+                    console.log(length_path);
+                }
+                tl.add( TweenMax.staggerFrom(svgs,0.3, {opacity:0,y:-20,onComplete:function(){
+                    if(paths.length>0)
+                    {
+                        TweenMax.to(paths,9,{strokeDashoffset:0});
+                        setTimeout(function(){
+                            TweenMax.to(paths,0.6,{fill:"#000",strokeWidth:0});
+                        },2000);
+                    }
+                }},0.1) );
+            }
         }
     },
     
@@ -668,14 +730,17 @@ var video = {
         setTimeout(function(){
             it.it.currentTime = 0;
             it.maj_bar();
-            it.it.volume = 0.8; //0.8 to change for launching
+            it.it.volume = 1; //0.8 to change for launching
             it.it.play();
         }, 1000);
         
         //Son
         document.querySelector('.toggle_sound').onclick = function(){
-            this.className = "icon-signal toggle_sound"; //Changement d'icone
-            it.toggleSound(); //On toggle le son
+            //if(this.className.match('/mute_sound/')
+            //    this.className = "toggle_sound";
+            //else
+                this.className = "toggle_sound mute_sound";
+            it.toggleSound();
         }
         
     },
@@ -740,7 +805,7 @@ var audio = {
         
         this.music = document.getElementById('music');
         this.music.pause();
-        this.music.volume = 0.6;
+        this.music.volume = 0.8;
         
         this.hover = document.getElementById('hover_sound');
         this.hover.pause();
@@ -876,16 +941,15 @@ var bonhomme = {
     },
     
     //Can move the bonhomme at x and y (in percent of the screen)
-    moveTo: function(x,y){
-        this.elem.parentNode.style.bottom = x+'%';
-        this.elem.parentNode.style.right = y+'%';
+    moveTo: function(x){
+        this.elem.parentNode.style.right = x+'%';
     },
     
     scale: function(){
         var scale = (window.innerHeight * 0.8 / 1200) + 0.1;
         var bottom = -14 + Math.exp((document.getElementById("bonhomme").offsetHeight*scale*2.3) / (320*0.7));
-        if(scale>0.8)
-            scale = 0.8;
+        if(scale>0.9)
+            scale = 0.9;
         else if(scale<0.5)
             scale = 0.5;
         document.getElementById("bonhomme").style.bottom = bottom+"%";

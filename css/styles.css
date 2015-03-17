@@ -805,10 +805,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     width: 33%;
     vertical-align: top;
 }
-.important_words img {
-    width: 30%;
+.important_words i {
+    display: inline-block;
+    width: 50%;
     margin-bottom: 10px;
-    opacity: 0.8;
+}
+.important_words i svg {
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+}
+.path{
+    stroke: #000;
+    stroke-width: 4;
+    fill:none;
+    -webkit-animation: all 3s ease;
+    animation: all 3s ease;
 }
 .important_words p{
     text-align: center;
@@ -1123,11 +1135,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
 /* Bonhomme */
 #bonhomme{
     position: absolute;
-    right: 2%;
+    right: 10%;
     bottom: -3%;
     opacity: 0.8;
     display: none;
     cursor:pointer;   
+    margin-right: -140px;
 }
 .animContainer{
     display: block;
@@ -1167,15 +1180,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     line-height: 3rem;
 }
 .social_bar{
-    margin-top: 20px;   
+    margin-top: 30px;   
 }
 .social_bar a{
-    font-size: 5rem !important;
-    opacity: 0.4;
+    width: 48px;
+    height: 48px;
+    margin: 0 10px;
+    opacity: 0.7;
     border-bottom: none !important;
 }
+.social_bar a svg{
+    width: 48px;
+    height: 48px;  
+}
 .social_bar a:hover{
-    opacity: 0.8;
+    opacity: 1;
     border-bottom: none !important;
 }
 
@@ -1240,13 +1259,33 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 #controls a:hover {
 	color: rgba(0,0,0,.6);
 }
-#controls a:first-child{
-    width: 60px;
-    padding-top: 0;
-}
 .toggle_sound{
-    font-size: 2rem;
-    padding-top: 5px;
+    display:block;
+    height: 32px !important;
+    width: 32px !important;
+    overflow: hidden;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: -7px;
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.toggle_sound span{
+    display: inline-block;
+    float: left;
+    height: 60%;
+    width: 3px;
+    margin-right: 2px;
+    background: rgba(0,0,0,0.3);
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+.toggle_sound:hover span{
+    background: rgba(0,0,0,0.6);
+}
+.mute_sound span{
+    height: 6%;   
 }
 
 @media screen and (max-width: 1024px){
