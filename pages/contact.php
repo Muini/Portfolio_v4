@@ -11,15 +11,15 @@ header('Content-Length: '.$filesize);
 <header>
     <h1 class="title_page">Contact</h1>
 </header>
-<h2>Wow, it's done, then what ?</h2>
-<h3 class="description">When it’s done, you will have to stay in touch with people. It’s the best moment of the project </h3>
-<p>I'm actually looking for an internship of six months from july to december.</p>
+<h2>And it's done, then what ?</h2>
+<h3 class="description">Just enjoy the result and stay in touch with people.</h3>
+<p>For my study, I'm actually looking for an <span class="bold">internship</span> of six months from <span class="bold">july to december</span>.</p>
+<p>Don't hesitate to hire me for only 14k€/month : <a href="mailto:hi@corentinflach.fr"><span class="bold">hi@corentinflach.fr</span></a></p>
 <div class="social_bar">
-    <p>corentinflach@gmail.com</p>
-    <a href="http://twitter.com/CorentinFlach" target="_blank"><span class="icon-twitter-squared"></span></a>
-    <a href="http://www.youtube.com/user/ActiniumStudio" target="_blank"><span class="icon-youtube"></span></a>
+    <a href="http://corentinflach.fr/cv/cv2015.pdf" target="_blank"><span class="icon-linkedin-squared"></span></a>
     <a href="http://www.linkedin.com/in/corentinflach" target="_blank"><span class="icon-linkedin-squared"></span></a>
-    <a href="http://plus.google.com/+CorentinFlach" rel="author" target="_blank"><span class="icon-gplus-squared"></span></a>
+    <a href="http://www.youtube.com/user/ActiniumStudio" target="_blank"><span class="icon-youtube"></span></a>
+    <a href="http://twitter.com/CorentinFlach" target="_blank"><span class="icon-twitter-squared"></span></a>
 </div>
 <?php
 if (!(array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER))){

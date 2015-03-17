@@ -256,12 +256,12 @@ var portfolio = {
     },
     
     animation: function(elem, out, callback){
-        var tl = new TimelineMax({onComplete:callback});
         if(out){
             //Define Out animation
             TweenMax.to(elem,.6,{y:"5%",opacity:0,onComplete:callback});
         }else{
             //Define In animation
+            var tl = new TimelineMax({onComplete:callback});
             tl.add( TweenMax.to(elem,.3,{y:"0%",opacity:1}) );
             if(elem.querySelectorAll(".title_site").length>0)
                 tl.add( TweenMax.from(elem.querySelectorAll(".title_site"), 1.9, {opacity:0,y:-20}) );
@@ -312,10 +312,10 @@ var portfolio = {
         
         //It's important to get a correct page title
         if(str == "" || str == "home" ){
-            document.title = "Corentin Flach - Storyteller";
+            document.title = "Corentin Flach • Storyteller / Motion Designer / Front-end developer";
         }else{
             str = str.charAt(0).toUpperCase() + str.slice(1);
-            document.title = "Corentin Flach - "+str;
+            document.title = "Corentin Flach • "+str+" • Storyteller / Motion Designer / Front-end developer";
         }
         
     },
@@ -827,8 +827,6 @@ var bonhomme = {
     scale: function(){
         var scale = (window.innerHeight * 0.8 / 1200) + 0.1;
         var bottom = -14 + Math.exp((document.getElementById("bonhomme").offsetHeight*scale*2.3) / (320*0.7));
-        console.log(bottom);
-        console.log();
         if(scale>0.8)
             scale = 0.8;
         else if(scale<0.5)

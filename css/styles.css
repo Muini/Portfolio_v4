@@ -705,6 +705,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     -webkit-transition: height .6s ease;
             transition: height .6s ease;
 }
+.navProgress_step:hover:after{
+    content: attr(data-link);
+    font-size: 1.2rem;
+    font-weight: 400;
+    position: absolute;
+    text-transform: uppercase;
+    margin-left: 10px;
+}
 .navProgress_step:hover{
     color: rgba(0,0,0,0.6);
     
@@ -1104,6 +1112,39 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     background: url("../img/bonhomme.png") 0 0 no-repeat;
     margin: 0 auto;
 }
+
+/* Contact */
+#page_contact .bold{
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+#page_contact a{
+    font-size: 1.4rem;   
+    border-bottom: 1px dashed rgba(0,0,0,0.4);
+}
+#page_contact a:hover{
+    border-bottom: 1px solid rgba(0,0,0,0.8);
+}
+#page_contact .description{
+    margin-bottom: 20px;   
+}
+#page_contact p{
+    text-align: center;
+    line-height: 3rem;
+}
+.social_bar{
+    margin-top: 20px;   
+}
+.social_bar a{
+    font-size: 5rem !important;
+    opacity: 0.4;
+    border-bottom: none !important;
+}
+.social_bar a:hover{
+    opacity: 0.8;
+    border-bottom: none !important;
+}
+
 /*
 *===================================
 *    FOOTER
