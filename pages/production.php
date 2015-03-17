@@ -26,7 +26,7 @@ header('Content-Length: '.$filesize);
                 </header>
                 <p class="p_description">Done in two weeks, JobShaker is a school project showing the employment rate in France by departement and sector. Browsing the website can therefore help you decide if you want to move somewhere for a new job.</p>
                 <footer>
-                    <p class="p_tools">Backbone.js | Handlebars | Require | D3JS | JQuery</p>
+                    <p class="p_tools">Backbone.js | D3JS | JQuery</p>
                     <p class="p_role">Graphic developement with D3JS</p>
                 </footer>
             </div>

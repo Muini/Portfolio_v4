@@ -164,12 +164,12 @@ var portfolio = {
                         if(it.first_launch){
                             //Test the computer performance with counting
                             var start = new Date();
-                            for (var i=0; i<20000000; i++); 
+                            for (var i=0; i<10000000; i++); 
                             var end = new Date();
                             var diff = end - start;
                             console.log(diff+"ms");
                                                                                        
-                            if(diff>40){
+                            if(diff>20){
                                 //No Canvas
                                 document.getElementById("canvas").parentElement.removeChild(document.getElementById("canvas"));
                             }
@@ -177,7 +177,7 @@ var portfolio = {
                             //Delete de beforeLoad then draw the page then UI elements
                             setTimeout(function(){
                                 
-                                if(diff>30){
+                                if(diff>10){
                                     //Stop vidéo
                                     video.it.pause();
                                     video.it.src = "";
@@ -251,6 +251,8 @@ var portfolio = {
         }else if(name == "skills"){
             document.getElementById("tree_of_skills").innerHTML = "";
             portfolio.treeOfSkills.init();
+        }else if(name == "production"){
+            portfolio.projectsNav.init();
         }
         
     },
@@ -277,7 +279,7 @@ var portfolio = {
             if(elem.querySelectorAll("span").length>0)
                 tl.add( TweenMax.staggerFrom(elem.querySelectorAll("span"),0.3, {opacity:0,y:-10},0.1) );
             if(elem.querySelectorAll(".a_project").length>0)
-                tl.add( TweenMax.staggerFrom(elem.querySelectorAll(".a_project"),0.3, {scale:0.9,opacity:0,y:-10},0.1) );
+                tl.add( TweenMax.staggerFrom(elem.querySelectorAll(".a_project"),0.6, {scale:0,y:"-10%",rotationY:90},0.1) );
             if(elem.querySelectorAll("hr").length>0)
                 tl.add( TweenMax.from(elem.querySelectorAll("hr"), 0.3, {width:0}) );
             if(elem.querySelectorAll("p").length>0)
@@ -582,6 +584,61 @@ var portfolio = {
             
         }
 
+    },
+    
+    //Project Navigation with hover
+    projectsNav: {
+        
+        elems: null,
+        
+        currentIndex: 1,
+        
+        blockControl: false,
+        
+        speed: 1,
+        
+        init: function(){
+            var it = this;
+            it.elems = document.querySelectorAll('.a_project');
+            it.elems[it.currentIndex].style.opacity = 1;
+            for(var i=0; i<it.elems.length; i++)
+            {
+                (function(index){
+                    it.elems[i].onmouseover = it.elems[i].onclick = function(){
+                        
+                        if(index != it.currentIndex && it.blockControl == false)
+                        {
+                            it.currentIndex = index;
+                            it.blockControl = true;
+                            for(var i=0; i<it.elems.length; i++){ it.elems[i].style.opacity = 0.5; }
+                            this.style.opacity = 1;
+                            var projects = document.getElementById('projects_3D');
+                            switch(index)
+                            {
+                                case 0:
+                                    TweenMax.to(projects,it.speed,{x:"880px",rotationY:"80",onComplete:function(){ it.blockControl = false; }});
+                                break;
+                                case 1:
+                                    TweenMax.to(projects,it.speed,{x:"540px",rotationY:"40",onComplete:function(){ it.blockControl = false; }});
+                                break;
+                                case 2:
+                                    TweenMax.to(projects,it.speed,{x:"0px",rotationY:"0",onComplete:function(){ it.blockControl = false; }});
+                                break;
+                                case 3:
+                                    TweenMax.to(projects,it.speed,{x:"-540px",rotationY:"-40",onComplete:function(){ it.blockControl = false; }});
+                                break;
+                                case 4:
+                                    TweenMax.to(projects,it.speed,{x:"-880px",rotationY:"-80",onComplete:function(){ it.blockControl = false; }});
+                                break;
+                                
+                            }
+                        }
+                    };
+                })(i);
+            }
+
+        },
+        
     }
     
 }
