@@ -69,14 +69,15 @@ var portfolio = {
 
         var nextPage;
         
-        if(index == this.pages.length-1)
-            nextPage = this.pages[0].getAttribute('id');
-        else
+        if(index == this.pages.length-1){
+//            nextPage = this.pages[0].getAttribute('id');
+        }else{
             nextPage = this.pages[index+1].getAttribute('id');
+            
+            nextPage = nextPage.split("_")[1];
         
-        nextPage = nextPage.split("_")[1];
-        
-        this.goTo(nextPage);
+            this.goTo(nextPage);
+        }
         
     },
     
@@ -92,14 +93,15 @@ var portfolio = {
 
         var previousPage;
         
-        if(index == 0)
-            previousPage = this.pages[this.pages.length-1].getAttribute('id');
-        else
+        if(index == 0){
+//            previousPage = this.pages[this.pages.length-1].getAttribute('id');
+        }else{
             previousPage = this.pages[index-1].getAttribute('id');
-        
-        previousPage = previousPage.split("_")[1];
-        
-        this.goTo(previousPage);
+                    
+            previousPage = previousPage.split("_")[1];
+
+            this.goTo(previousPage);
+        }
         
     },
     
@@ -336,7 +338,6 @@ var portfolio = {
                     var length_path = paths[i].getTotalLength();
                     paths[i].style.strokeDashoffset = length_path;
                     paths[i].style.strokeDasharray = length_path+" "+length_path;
-                    console.log(length_path);
                 }
                 tl.add( TweenMax.staggerFrom(svgs,0.3, {opacity:0,y:-20,onComplete:function(){
                     if(paths.length>0)
@@ -1029,9 +1030,9 @@ settings.numAgents = 20;
 //settings.colors = ["150,250,200","100,200,150","100,200,250","100,250,70"];
 //settings.colors = ["50,150,250","0,100,200","0,50,100","100,200,250"];
 //settings.colors = ["50,150,250","0,100,200","0,50,100","100,200,250","150,250,200","100,200,150","100,200,250","100,250,70"];
-//settings.colors = ["50,50,50","100,100,100","150,150,150","200,200,200"];
+settings.colors = ["50,50,50","100,100,100","150,150,150","200,200,200"];
 
-settings.colors = ["115,110,116","105,77,63","228,240,228"]; //Good
+//settings.colors = ["115,110,116","105,77,63","228,240,228"]; //Good
 //settings.colors = ["33,33,87","69,185,176","135,0,7","95,50,117"];
 settings.agentAlpha = 0.2;
 settings.agentSize = 4;
@@ -1139,7 +1140,7 @@ for(var i=0; i<settings.numAgents; i++)
     myAgent.push(createAgent(null));
 }           
 
-document.getElementById("container").onclick = function(e){
+document.body.onclick = function(e){
     if(myAgent.length<settings.maxAgent)
     {
         var mouse_e = e;
@@ -1156,7 +1157,7 @@ function step(){
     var triangles = Delaunay.triangulate(myAgent);
    
     // Draw triangles
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.2 )";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.1 )";
     for(i = 0; i < triangles.length; i += 3) {
         
         var a1 = myAgent[triangles[i]];
@@ -1175,7 +1176,7 @@ function step(){
         ctx.lineTo(a2.x, a2.y);
         ctx.lineTo(a3.x, a3.y);
         ctx.closePath();
-        //ctx.stroke();
+        ctx.stroke();
         ctx.fill();
     }
     myAgent.forEach(function(a){
