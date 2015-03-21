@@ -169,7 +169,7 @@ var portfolio = {
                             for (var i=0; i<10000000; i++); 
                             var end = new Date();
                             var diff = end - start;
-                            console.log(diff+"ms");
+                            //console.log(diff+"ms");
                                                                                        
                             if(diff>20){
                                 //No Canvas
@@ -179,11 +179,14 @@ var portfolio = {
                             //Delete de beforeLoad then draw the page then UI elements
                             setTimeout(function(){
                                 
-                                if(diff>10){
+                                if( (diff>12) || (window.innerWidth<960) ){
                                     //Stop vidéo
                                     video.it.pause();
                                     video.it.src = "";
+                                    document.querySelector(".toggle_sound").className = "toggle_sound mute_sound hover_sound";
                                 }
+                                
+                                audio.playHover("sound/first_launch.mp3");
                                 
                                 TweenMax.to(document.getElementById('beforeLoad'),1,{opacity:0,onComplete:function(){
                                     document.getElementById('beforeLoad').style.display = "none";
@@ -273,15 +276,22 @@ var portfolio = {
                     //Goto tree
                     bonhomme.moveTo(66);
                     //Teleport In
+                    audio.playHover("sound/teleport.mp3");
                     bonhomme.play(1,12,12,true,function(){
                         //Create tree
-                        setTimeout(function(){ portfolio.treeOfSkills.init(); },250);
+                        setTimeout(function(){ 
+                            portfolio.treeOfSkills.init(); 
+                            setTimeout(function(){ 
+                                audio.playHover("sound/tree.mp3");
+                            },700);
+                        },250);
                         bonhomme.play(4,19,12,false,function(){
                             //Teleport Out
                             bonhomme.play(1,12,12,false,function(){
                                 //Go to Default
                                 bonhomme.moveTo(10);
                                 //Teleport In
+                                audio.playHover("sound/teleport.mp3");
                                 bonhomme.play(1,12,12,true,null);
                             });
                         });
@@ -303,7 +313,10 @@ var portfolio = {
         if(out){
             //Define Out animation
             TweenMax.to(elem,.6,{y:"5%",opacity:0,onComplete:callback});
+            
+            audio.playHover("sound/page_change.mp3");
         }else{
+            audio.checkHoverSound();
             //Define In animation
             var tl = new TimelineMax({onComplete:callback});
             tl.add( TweenMax.to(elem,.3,{y:"0%",opacity:1}) );
@@ -321,7 +334,7 @@ var portfolio = {
             if(elem.querySelectorAll("span").length>0)
                 tl.add( TweenMax.staggerFrom(elem.querySelectorAll("span"),0.3, {opacity:0,y:-10},0.1) );
             if(elem.querySelectorAll(".a_project").length>0)
-                tl.add( TweenMax.staggerFrom(elem.querySelectorAll(".a_project"),0.6, {scale:0,y:"-10%",rotationY:90},0.1) );
+                tl.add( TweenMax.staggerFrom(elem.querySelectorAll(".a_project"),0.6, {scale:0.8,y:"-10%",rotationY:90},0.1) );
             if(elem.querySelectorAll("hr").length>0)
                 tl.add( TweenMax.from(elem.querySelectorAll("hr"), 0.3, {width:0}) );
             if(elem.querySelectorAll("p").length>0)
@@ -436,7 +449,8 @@ var portfolio = {
         addStep: function(name){
             var newStep = document.createElement('a');
             newStep.setAttribute('data-link',name);
-            newStep.setAttribute('class','navProgress_step');
+            newStep.setAttribute('class','navProgress_step hover_sound');
+            newStep.setAttribute('data-hover-sound','sound/hover.mp3');
             newStep.innerHTML = '▼';
             newStep.onclick = function(){
                 portfolio.goTo(this.getAttribute('data-link'));   
@@ -452,10 +466,10 @@ var portfolio = {
             {
                 if( steps[i].getAttribute('data-link') == str )
                 {
-                    steps[i].className = 'navProgress_step active_step';
+                    steps[i].className = 'navProgress_step active_step hover_sound';
                     progressBar.style.height = (i*(100/steps.length))+"%";
                 }else{
-                    steps[i].className = 'navProgress_step';
+                    steps[i].className = 'navProgress_step hover_sound';
                 }
             }
         }
@@ -613,6 +627,8 @@ var portfolio = {
         // Toggle children on click.
         hover: function(d) {
             
+            audio.playHover('sound/hover.mp3');
+            
             var skills = document.querySelectorAll(".skill");
             for(var i=0; i<skills.length; i++){
                 skills[i].className = "skill hidden";
@@ -671,6 +687,7 @@ var portfolio = {
                         
                         if(index != it.currentIndex && it.blockControl == false)
                         {
+                            audio.playHover("sound/hover.mp3");
                             it.currentIndex = index;
                             it.blockControl = true;
                             for(var i=0; i<it.elems.length; i++){ it.elems[i].style.opacity = 0.5; }
@@ -679,19 +696,19 @@ var portfolio = {
                             switch(index)
                             {
                                 case 0:
-                                    TweenMax.to(projects,it.speed,{x:"880px",rotationY:"80",onComplete:function(){ it.blockControl = false; }});
+                                    TweenMax.to(projects,it.speed,{x:"1280px",onComplete:function(){ it.blockControl = false; }});
                                 break;
                                 case 1:
-                                    TweenMax.to(projects,it.speed,{x:"540px",rotationY:"40",onComplete:function(){ it.blockControl = false; }});
+                                    TweenMax.to(projects,it.speed,{x:"640px",onComplete:function(){ it.blockControl = false; }});
                                 break;
                                 case 2:
-                                    TweenMax.to(projects,it.speed,{x:"0px",rotationY:"0",onComplete:function(){ it.blockControl = false; }});
+                                    TweenMax.to(projects,it.speed,{x:"0px",onComplete:function(){ it.blockControl = false; }});
                                 break;
                                 case 3:
-                                    TweenMax.to(projects,it.speed,{x:"-540px",rotationY:"-40",onComplete:function(){ it.blockControl = false; }});
+                                    TweenMax.to(projects,it.speed,{x:"-640px",onComplete:function(){ it.blockControl = false; }});
                                 break;
                                 case 4:
-                                    TweenMax.to(projects,it.speed,{x:"-880px",rotationY:"-80",onComplete:function(){ it.blockControl = false; }});
+                                    TweenMax.to(projects,it.speed,{x:"-1280px",onComplete:function(){ it.blockControl = false; }});
                                 break;
                                 
                             }
@@ -729,7 +746,7 @@ var video = {
         TweenMax.to(loader_bar,0,{opacity:1,width:0});
         
         setTimeout(function(){
-            it.it.currentTime = 0;
+            //it.it.currentTime = 0;
             it.maj_bar();
             it.it.volume = 1; //0.8 to change for launching
             it.it.play();
@@ -737,10 +754,6 @@ var video = {
         
         //Son
         document.querySelector('.toggle_sound').onclick = function(){
-            //if(this.className.match('/mute_sound/')
-            //    this.className = "toggle_sound";
-            //else
-                this.className = "toggle_sound mute_sound";
             it.toggleSound();
         }
         
@@ -777,6 +790,13 @@ var video = {
     
     toggleSound: function(){
         
+        var btn_sound = document.querySelector('.toggle_sound');
+        if(/mute_sound/.test(btn_sound.className)){
+            btn_sound.className = "toggle_sound hover_sound";
+        }else{
+            btn_sound.className = "toggle_sound mute_sound hover_sound";
+        }
+        
         if(!this.it.muted){
             audio.muteMusic();
         }
@@ -801,6 +821,8 @@ var audio = {
     
     //Every hover sound is just one player
     hover: null,
+    hover2: null,
+    altHover: false,
     
     init: function(){
         
@@ -811,6 +833,9 @@ var audio = {
         this.hover = document.getElementById('hover_sound');
         this.hover.pause();
         this.hover.volume = 0.4;
+        this.hover2 = document.getElementById('hover_sound2');
+        this.hover2.pause();
+        this.hover2.volume = 0.4;
         
         var btns_music = document.querySelectorAll('.btn_music');
         for(var i=0; i<btns_music.length; i++)
@@ -820,7 +845,28 @@ var audio = {
                 it.playMusic(this.getAttribute('data-music'));
             }
         }
+    },
+    
+    muteMusic: function(){
         
+        this.music.pause();
+        //this.music.currentTime = 0;
+        
+    },
+    
+    playMusic: function(src){
+        
+        if(video.it.muted)
+            video.it.muted = false;
+        if(this.music.src != src)
+            this.music.src = src;
+        //this.music.currentTime = 0;
+        this.music.play();
+        
+        document.querySelector('.toggle_sound').className = "toggle_sound hover_sound";
+    },
+    
+    checkHoverSound: function(){
         var hover_sound = document.querySelectorAll('.hover_sound');
         for(var i=0; i<hover_sound.length; i++)
         {
@@ -829,33 +875,26 @@ var audio = {
                 it.playHover(this.getAttribute('data-hover-sound'));
             }
         }
-        
-    },
-    
-    muteMusic: function(){
-        
-        this.music.pause();
-        this.music.currentTime = 0;
-        
-    },
-    
-    playMusic: function(src){
-        
-        if(video.it.muted)
-            video.it.muted = false;
-        this.music.src = src;
-        this.music.currentTime = 0;
-        this.music.play();
-        
     },
     
     playHover: function(src){
-        
         if(!video.it.muted)
         {
-            this.hover.src = src;
-            this.hover.currentTime = 0;
-            this.hover.play();
+            if(this.altHover){
+                this.hover2.pause();
+                if(this.hover2.src != src)
+                    this.hover2.src = src;
+                //this.hover2.currentTime = 0;
+                this.hover2.play();
+                this.altHover = false;
+            }else{
+                this.hover.pause();
+                if(this.hover.src != src)
+                    this.hover.src = src;
+                //this.hover.currentTime = 0;
+                this.hover.play();
+                this.altHover = true;
+            }
         }
         
     }
@@ -886,6 +925,7 @@ var bonhomme = {
             it.elem.style.backgroundPosition = it.width + "px " + it.height +"px";
             it.scale();
             setTimeout(function(){
+                audio.playHover("sound/teleport.mp3");
                 it.play(1,12,12,true,null);
             },500);
         }
@@ -1030,9 +1070,8 @@ settings.numAgents = 20;
 //settings.colors = ["150,250,200","100,200,150","100,200,250","100,250,70"];
 //settings.colors = ["50,150,250","0,100,200","0,50,100","100,200,250"];
 //settings.colors = ["50,150,250","0,100,200","0,50,100","100,200,250","150,250,200","100,200,150","100,200,250","100,250,70"];
-settings.colors = ["50,50,50","100,100,100","150,150,150","200,200,200"];
-
-//settings.colors = ["115,110,116","105,77,63","228,240,228"]; //Good
+//settings.colors = ["50,50,50","100,100,100","150,150,150","200,200,200"];
+settings.colors = ["115,110,116","105,77,63","228,240,228"]; //Good
 //settings.colors = ["33,33,87","69,185,176","135,0,7","95,50,117"];
 settings.agentAlpha = 0.2;
 settings.agentSize = 4;
@@ -1110,21 +1149,13 @@ function createAgent(m){
         agent.y += agent.yIncrement ;
 
         if(agent.x < 0){
-//          agent.x += 10;
             agent.x = settings.displaySizeX;
-            //agent.y *= -1;
         }else if(agent.y < 0){
-//          agent.y += 10;
             agent.y = settings.displaySizeY;
-            //agent.x *= -1;
         }else if(agent.x > settings.displaySizeX){
-//          agent.x -= 10;
             agent.x = 0;
-            //agent.y *= -1;
         }else if(agent.y > settings.displaySizeY){
-//          agent.y -= 10;
             agent.y = 0;
-            //agent.x *= -1;
         }
     };
     
@@ -1150,7 +1181,6 @@ document.body.onclick = function(e){
 
 function step(){
     //Effacer l'écran
-    //ou clearRect
     ctx.clearRect(0,0, settings.displaySizeX, settings.displaySizeY);
     
     // Get Delaunay triangles
@@ -1185,8 +1215,6 @@ function step(){
 
     requestAnimationFrame(step);
 };
-
-//var timer = setInterval(step, 1000/60); //60 fps
 
 requestAnimationFrame(step);
 

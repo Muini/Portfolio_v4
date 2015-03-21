@@ -106,7 +106,7 @@
         },
         {
           "name": "conception",
-          "size": 2000,
+          "size": 3000,
           "children": [
             {
               "name": "ux_design",
@@ -120,11 +120,11 @@
         },
         {
           "name": "developement",
-          "size": 5000,
+          "size": 6000,
           "children": [
             {
               "name": "front_end",
-              "size": 5000,
+              "size": 6000,
               "children": [
                 {
                   "name": "html5_css3",

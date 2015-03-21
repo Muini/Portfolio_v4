@@ -11,11 +11,10 @@ $filesize = "";
     <h1 class="title_page">The Tree of Skills</h1>
 </header>
 <section id="skills_description">
-    <h2>Well, what can I use ?</h2>
-    <h3 class="description">Everything, I need skills to produce my ideas.</h3>
-    <p>Or I can buy some friends with beers to do the work for me</p>
-    <p>But I like to learn to do it myself.</p>
-    <p>So here are my actual skills tree, it still growing.</p>
+    <h2>Well, I need skills ?</h2>
+    <h3 class="description">Yup, here it is and it still growing.</h3>
+    <p>I can buy some friends with beers to do the work for me...</p>
+    <p>...but I like to learn to do it myself.</p>
 </section>
 <section id="tree_of_skills">
     <!-- Here come the tree ! -->
@@ -25,7 +24,7 @@ $filesize = "";
     <div id="s_video" class="skill hidden">
         <h2>Film Making / Video</h2>
         <div class="s_img"></div>
-        <p>Film making is one of my oldest hobby's. I've started with Lego stop motion and now i'm trying to create <a href="http://www.youtube.com/user/ActiniumStudio" target="_blank">real short film</a> with friends.</p>
+        <p>Film making is one of my oldest hobby's. I've started with Lego stop motion and now i'm trying to create <a href="http://www.youtube.com/user/ActiniumStudio" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">real short film</a> with friends.</p>
     </div>
         <div id="s_pre-production" class="skill hidden">
             <h2>Pre-Production</h2>
@@ -80,7 +79,7 @@ $filesize = "";
             <div id="s_acting" class="skill hidden">
                 <h2>Acting</h2>
                 <div class="s_img"></div>
-                <p>Yup, I'm acting. Okay it's terrible... but I'm trying. It's a good experience to know how to speak with actors. If you're <a href="http://www.youtube.com/watch?v=wLeDSSw8DYA" target="_blank">curious</a>.</p>
+                <p>Yup, I'm acting. Okay it's terrible... but I'm trying. It's a good experience to know how to speak with actors. If you're <a href="http://www.youtube.com/watch?v=wLeDSSw8DYA" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">curious</a>.</p>
             </div>
             <div id="s_fun" class="skill hidden">
                 <h2>Fun</h2>
@@ -152,7 +151,7 @@ $filesize = "";
             <div id="s_ui_design" class="skill hidden">
                 <h2>UI Design</h2>
                 <div class="s_img"></div>
-                <p>I'm not very good at it but I'm aware how difficult it can be.</p>
+                <p>I like to be aware of good & new design and how there are done.</p>
             </div>
         <div id="s_developement" class="skill hidden">
             <h2>Developement</h2>
@@ -229,12 +228,12 @@ $filesize = "";
             <div id="s_pre-rendered" class="skill hidden">
                 <h2>Pre-rendered</h2>
                 <div class="s_img"></div>
-                <p>I'm using Blender to create precalculated render scene, you can check <a href="http://www.youtube.com/watch?v=WZgPWUAQbys" title="Le Herisson Glouton" target="_blank">my latest 3D Animation</a>.</p>
+                <p>I'm using Blender to create precalculated render scene, you can check <a href="http://www.youtube.com/watch?v=WZgPWUAQbys" title="Le Herisson Glouton" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">my latest 3D Animation</a>.</p>
             </div>
             <div id="s_real_time" class="skill hidden">
                 <h2>Real Time</h2>
                 <div class="s_img"></div>
-                <p>A good part is real time rendering. I'm using Source engine to build a game called <a href="http://www.indiedb.com/games/nag" title="See Nag" target="_blank">Nag</a>. I'm doing every part of the developement.</p>
+                <p>A good part is real time rendering. I'm using Source engine to build a game called <a href="http://www.indiedb.com/games/nag" title="See Nag" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">Nag</a>. I'm doing every part of the developement.</p>
             </div>
     
     

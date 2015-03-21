@@ -4,7 +4,7 @@
 	<div id="wrapper">
 
         <div id="wrapper_video">
-            <video id="video_bg" preload="auto" loop muted>
+            <video id="video_bg" preload="auto" loop>
 <!--                <source src="vid/bg_vid.mp4" type="video/mp4" />-->
 <!--			<source src="vid/bg_vid.webm"type="video/webm" />-->
                 Your browser does not support the video tag. You need to update your browser or change it :/
@@ -12,7 +12,7 @@
         </div>
 
         <noscript>
-            <p id="noscript">Oops ! Javascript is desactivated ! Activate it for a full fonctionnal navigation !</p>
+            Oops ! Javascript is desactivated ! Activate it for a full fonctionnal navigation !
         </noscript>
         
         <div id="beforeLoad">
@@ -160,11 +160,11 @@
 
         <footer id="footer">
             <nav id="controls">
-                <a class="toggle_sound"><span></span><span></span><span></span><span></span><span></span></a>
-                <a class="btn_music" data-music="music/music_jazz.mp3">•</a>
-                <a class="btn_music" data-music="music/music_film.mp3">•</a>
-                <a class="btn_music" data-music="music/music_vacances.mp3">•</a>
-                <a class="btn_music" data-music="music/music_hardrock.mp3">•</a>
+                <a class="toggle_sound hover_sound" data-hover-sound="sound/hover.mp3"><span></span><span></span><span></span><span></span><span></span></a>
+                <a class="btn_music hover_sound" data-hover-sound="sound/hover.mp3" data-music="music/music_film.mp3">•</a>
+                <a class="btn_music hover_sound" data-hover-sound="sound/hover.mp3" data-music="music/music_jazz.mp3">•</a>
+                <a class="btn_music hover_sound" data-hover-sound="sound/hover.mp3" data-music="music/music_vacances.mp3">•</a>
+                <a class="btn_music hover_sound" data-hover-sound="sound/hover.mp3" data-music="music/music_hardrock.mp3">•</a>
             </nav>
             <div id="progressBar"></div>
         </footer>
@@ -174,6 +174,10 @@
             <source src="" type="audio/ogg" />
         </audio>
         <audio id="hover_sound">
+            <source src="" type="audio/mpeg" />
+            <source src="" type="audio/ogg" />
+        </audio>
+        <audio id="hover_sound2">
             <source src="" type="audio/mpeg" />
             <source src="" type="audio/ogg" />
         </audio>

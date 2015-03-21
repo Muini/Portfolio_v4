@@ -12,11 +12,11 @@ $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
     <h1 class="title_page">Contact</h1>
 </header>
 <h2>And it's done, then what ?</h2>
-<h3 class="description">Just enjoy the result and stay in touch with people.</h3>
+<h3 class="description">Enjoy the result and stay in touch with people.</h3>
 <p>For my study, I'm actually looking for an <span class="bold">internship</span> of six months from <span class="bold">july to december</span>.</p>
-<p>Don't hesitate to hire me for only 14k€/month : <a href="mailto:hi@corentinflach.fr"><span class="bold">hi@corentinflach.fr</span></a></p>
+<p>Don't hesitate to hire me for only 14k€/month : <a href="mailto:hi@corentinflach.fr" class="hover_sound" data-hover-sound="sound/hover.mp3"><span class="bold">hi@corentinflach.fr</span></a></p>
 <div class="social_bar">
-    <a href="http://corentinflach.fr/cv/cv2015.pdf" target="_blank">
+    <a href="http://corentinflach.fr/cv/cv2015.pdf" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64">
             <g id="Layer0_0_FILL">
                 <path fill="#333333" stroke="none" d="
@@ -29,7 +29,7 @@ $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
             </g>
         </svg>
     </a>
-    <a href="http://www.linkedin.com/in/corentinflach" target="_blank">
+    <a href="http://www.linkedin.com/in/corentinflach" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64">
             <g id="Layer3_0_FILL">
                 <path fill="#333333" stroke="none" d="
@@ -50,7 +50,7 @@ $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
             </g>
         </svg>
     </a>
-    <a href="http://www.youtube.com/user/ActiniumStudio" target="_blank">
+    <a href="http://www.youtube.com/user/ActiniumStudio" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64">
             <g id="Layer2_0_FILL">
                 <path fill="#333333" stroke="none" d="
@@ -98,7 +98,7 @@ $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
             </g>
         </svg>
     </a>
-    <a href="http://twitter.com/CorentinFlach" target="_blank">
+    <a href="http://twitter.com/CorentinFlach" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64">
             <g id="Layer1_0_FILL">
                 <path fill="#333333" stroke="none" d="

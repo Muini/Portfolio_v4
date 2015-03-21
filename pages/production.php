@@ -12,7 +12,7 @@ header('Content-Length: '.$filesize);
     <h1 class="title_page">The Production</h1>
 </header>
 <h2>What about the result ?</h2>
-<h3 class="description">After production time.</h3>
+<h3 class="description">After production time, proudly present it.</h3>
 <p>Here are my major projects and the best is coming.</p>
 <div id="projects">
     <div id="projects_3D">
