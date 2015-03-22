@@ -162,7 +162,6 @@
             <nav id="controls">
                 <a class="toggle_sound hover_sound" data-hover-sound="sound/hover.mp3"><span></span><span></span><span></span><span></span><span></span></a>
                 <a class="btn_music hover_sound" data-hover-sound="sound/hover.mp3" data-music="music/music_film.mp3">•</a>
-                <a class="btn_music hover_sound" data-hover-sound="sound/hover.mp3" data-music="music/music_jazz.mp3">•</a>
                 <a class="btn_music hover_sound" data-hover-sound="sound/hover.mp3" data-music="music/music_vacances.mp3">•</a>
                 <a class="btn_music hover_sound" data-hover-sound="sound/hover.mp3" data-music="music/music_hardrock.mp3">•</a>
             </nav>

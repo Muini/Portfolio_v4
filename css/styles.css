@@ -834,8 +834,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     right: 10%;
     bottom: -3%;
     opacity: 0.8;
-    display: none;
-    cursor:pointer;   
+    display: none;  
     margin-right: -140px;
 }
 .animContainer{
@@ -855,7 +854,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     background: url("../img/bonhomme.png") 0 0 no-repeat;
     margin: 0 auto;
 }
-
 /* Contact */
 #page_contact .bold{
     font-size: 1.4rem;

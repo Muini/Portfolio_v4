@@ -303,8 +303,24 @@ var portfolio = {
             
             portfolio.projectsNav.init();
             
+            var delay = 0;
+            if(!firstlaunch){
+                delay = 1700;
+            }
+            setTimeout(function(){
+                bonhomme.play(5,14,12,false,null);
+            },delay);
+            
         }else if(name == "contact"){
             
+            var delay = 0;
+            if(!firstlaunch){
+                delay = 1700;
+            }
+            setTimeout(function(){
+                bonhomme.play(2,23,12,false,null);
+            },delay);
+              
         }
         
     },
@@ -927,6 +943,13 @@ var bonhomme = {
             setTimeout(function(){
                 audio.playHover("sound/teleport.mp3");
                 it.play(1,12,12,true,null);
+                it.elem.onclick = it.hitBonhomme;
+                it.elem.onmouseover = function(){ 
+                    if(portfolio.canNavigate)
+                        this.style.cursor = "pointer"; 
+                    else
+                        this.style.cursor = "auto"; 
+                };
             },500);
         }
     },
@@ -995,6 +1018,18 @@ var bonhomme = {
             scale = 0.5;
         document.getElementById("bonhomme").style.bottom = bottom+"%";
         TweenMax.to(document.querySelector(".animContainer"),0.3,{scale:scale});   
+    },
+    
+    hitBonhomme: function(){
+        if(portfolio.canNavigate)
+        {
+            bonhomme.moveTo(10);
+            audio.playHover("sound/hit.mp3");
+            bonhomme.play(7,19,12,false,function(){
+                audio.playHover("sound/teleport.mp3");
+                bonhomme.play(1,12,12,true,null);
+            });
+        }
     }
 }
 
