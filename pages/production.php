@@ -20,7 +20,7 @@ header('Content-Length: '.$filesize);
             <div>
                 <header>
                     <hr>
-                    <a href="http://jobshaker.fr/" target="_blank"><h2 class="p_title">JobShaker</h2></a>
+                    <!--<a href="http://jobshaker.fr/" target="_blank">--><h2 class="p_title">JobShaker</h2><!--</a>-->
                     <p class="p_status">School</p>
                     <hr>
                 </header>

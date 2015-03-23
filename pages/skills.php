@@ -12,7 +12,7 @@ $filesize = "";
 </header>
 <section id="skills_description">
     <h2>Well, I need skills ?</h2>
-    <h3 class="description">Yup, here it is and it still growing.</h3>
+    <h3 class="description">Yup, here's my skills tree and it still growing.</h3>
     <p>I can buy some friends with beers to do the work for me...</p>
     <p>...but I like to learn to do it myself.</p>
 </section>
@@ -121,7 +121,7 @@ $filesize = "";
     <div id="s_internet" class="skill hidden">
         <h2>Internet</h2>
         <div class="s_img"></div>
-        <p>Internet ? I'm calling it ! It is a living art.</p>
+        <p></p>
     </div>
         <div id="s_web_ideation" class="skill hidden">
             <h2>Ideation</h2>
