@@ -87,72 +87,38 @@
       ]
     },
     {
-      "name": "internet",
+      "name": "developement",
       "size": 5000,
       "children": [
         {
-          "name": "web_ideation",
-          "size": 4000,
+          "name": "front_end",
+          "size": 5000,
           "children": [
             {
-              "name": "technology_watch",
-              "size": 4000
+              "name": "html5_css3",
+              "size": 4500
             },
             {
-              "name": "graphical_watch",
+              "name": "javascript",
+              "size": 5000
+            },
+            {
+              "name": "responsiv",
               "size": 2000
             }
           ]
         },
         {
-          "name": "conception",
-          "size": 3000,
+          "name": "back_end",
+          "size": 1000,
           "children": [
             {
-              "name": "ux_design",
-              "size": 2000
-            },
-            {
-              "name": "ui_design",
+              "name": "ruby_on_rails",
               "size": 1000
-            }
-          ]
-        },
-        {
-          "name": "developement",
-          "size": 6000,
-          "children": [
-            {
-              "name": "front_end",
-              "size": 6000,
-              "children": [
-                {
-                  "name": "html5_css3",
-                  "size": 4500
-                },
-                {
-                  "name": "javascript",
-                  "size": 5000
-                },
-                {
-                  "name": "responsiv",
-                  "size": 2000
-                }
-              ]
             },
             {
-              "name": "back_end",
-              "size": 1000,
-              "children": [
-                {
-                  "name": "ruby_on_rails",
-                  "size": 1000
-                },
-                {
-                  "name": "wordpress",
-                  "size": 1000
-                }
-              ]
+              "name": "wordpress",
+              "size": 1000
             }
           ]
         }
