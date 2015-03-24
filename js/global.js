@@ -514,8 +514,8 @@ var portfolio = {
             
             it.force = d3.layout.force()
             .on("tick", this.tick)
-            .charge(function(d) { return -350*it.h/1000; }) //100 : -30
-            .linkDistance(function(d) { return 30*it.h/1000; })
+            .charge(function(d) { return -500*it.h/1000; }) //100 : -30
+            .linkDistance(function(d) { return 50*it.h/1000; })
             .size([this.w/1.5, this.h/1.2])
             ;
             

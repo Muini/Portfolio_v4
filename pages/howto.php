@@ -189,7 +189,7 @@ $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
             </svg>
         </i>
         <h4>Ideas</h4>
-        <p>Observation, reflexion, comprehension, imagination & coffee</p>
+        <p>Observation, reflexion, comprehension & imagination</p>
     </span>
 </div>
 <?php

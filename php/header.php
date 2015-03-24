@@ -36,7 +36,7 @@
 		<meta name="twitter:creator" content="@CorentinFlach">
 		<meta name="twitter:title" content="Corentin Flach • Storyteller / Motion Designer / Front-end developer">
 		<meta name="twitter:description" content="Storytelling with film-making, motion design, interactive & creative front-end developement, this is what I like and I do as french student & Freelance.">
-		<meta name="twitter:image:src" content="http://corentinflach.fr/img/pattern.jpg">
+		<meta name="twitter:image:src" content="http://corentinflach.fr/img/cover.jpg">
 		<meta name="twitter:domain" content="http://corentinflach.fr/">
         <!-- Facebook -->
 		<meta property="og:locale" content="en_US" />
@@ -46,11 +46,11 @@
 		<meta property="og:description" content="Storytelling with film-making, motion design, interactive & creative front-end developement, this is what I like and I do as french student & Freelance." />
 		<meta property="og:url" content="http://corentinflach.fr/" />
 		<meta property="og:site_name" content="Corentin Flach • Storyteller / Motion Designer / Front-end developer" />
-		<meta property="og:image" content="http://corentinflach.fr/img/pattern.jpg" />
+		<meta property="og:image" content="http://corentinflach.fr/img/cover.jpg" />
 		<!-- Google Plus -->
         <meta itemprop="name" content="Corentin Flach • Storyteller / Motion Designer / Front-end developer">
         <meta itemprop="description" content="Storytelling with film-making, motion design, interactive & creative front-end developement, this is what I like and I do as french student & Freelance.">
-        <meta itemprop="image" content="http://corentinflach.fr/img/pattern.jpg">
+        <meta itemprop="image" content="http://corentinflach.fr/img/cover.jpg">
 	</head>
 	
 	<body>

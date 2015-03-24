@@ -608,6 +608,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4de3ede7', e
     float: right;
     text-align: right;
 }
+#skills_description .description{
+    font-size: 1.4rem;   
+}
 #skills_description p,.skill p{
     text-align: right;
 }
