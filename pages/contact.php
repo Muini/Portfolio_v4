@@ -16,7 +16,7 @@ $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
 <p>For my study, I'm actually looking for an <span class="bold">internship</span> of six months from <span class="bold">july to december</span>.</p>
 <p>Feel free to contact me : <a href="mailto:hi@corentinflach.fr" class="hover_sound" data-hover-sound="sound/hover.mp3"><span class="bold">hi@corentinflach.fr</span></a></p>
 <div class="social_bar">
-    <a href="cv/cv2015.pdf" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">
+    <a href="http://corentinflach.fr/cv/CV2015.pdf" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64">
             <g id="Layer0_0_FILL">
                 <path fill="#333333" stroke="none" d="

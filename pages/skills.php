@@ -154,7 +154,7 @@ $filesize = "";
                 <p>I like to be aware of good & new design and how there are done.</p>
             </div>
         <div id="s_developement" class="skill hidden">
-            <h2>Developement</h2>
+            <h2>Development</h2>
             <div class="s_img"></div>
             <p>Programming ! Algorithmic provides endless possibilities.</p>
         </div>
@@ -233,7 +233,7 @@ $filesize = "";
             <div id="s_real_time" class="skill hidden">
                 <h2>Real Time</h2>
                 <div class="s_img"></div>
-                <p>I'm using Source engine to build a game called <a href="http://www.indiedb.com/games/nag" title="See Nag" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">Nag</a>. I'm doing every part of the developement.</p>
+                <p>I'm using Source engine to build a game called <a href="http://www.indiedb.com/games/nag" title="See Nag" target="_blank" class="hover_sound" data-hover-sound="sound/hover.mp3">Nag</a>. I'm doing every part of the development.</p>
             </div>
     
     

@@ -35,7 +35,7 @@ $filesize = filesize($_SERVER['SCRIPT_FILENAME']);
                 </g>
             </svg>
         </i>
-        <h4>Developement</h4>
+        <h4>Development</h4>
         <p>Innovative, original & interactive content</p>
     </span>
     <span>
